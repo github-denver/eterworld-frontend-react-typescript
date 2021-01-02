@@ -1,38 +1,418 @@
-.App {
+.group_search {
+  display: none;
+}
+
+/* reset
+---------- ---------- ---------- ---------- ---------- */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body,
+input,
+select,
+textarea,
+button {
+  font-size: 14px;
+  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', 'Segoe UI', 'Roboto', 'Helvetica Neue',
+    'Arial, Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  color: #000;
+}
+
+body {
+  -webkit-text-size-adjust: none;
+}
+
+ol,
+ul,
+li {
+  list-style-type: none;
+}
+
+fieldset,
+img {
+  border: 0 none;
+}
+
+img {
+  vertical-align: top;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+a:active,
+a:hover {
+  text-decoration: none;
+}
+
+/* global
+---------- ---------- ---------- ---------- ---------- */
+.invisible {
+  display: none;
+}
+
+.outer_cell {
+  display: table;
+}
+
+.inner_cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.group_half {
+  font-size: 0;
+}
+
+.inner_half {
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
+}
+
+.section_global {
+  margin-top: 24px;
+}
+
+/* .hgroup + .group_grade {
+  margin-top: 12px;
+} */
+
+/* .group_grade + .group_horizontal {
+  margin-top: 24px;
+} */
+
+/* button
+---------- ---------- ---------- ---------- ---------- */
+.button_global {
+  display: inline-block;
+  border: 0 none;
+  border-radius: 6px;
+  box-sizing: border-box;
+  line-height: 1;
+  vertical-align: top;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* icon
+---------- ---------- ---------- ---------- ---------- */
+.icon_global {
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 1px;
+  line-height: 1;
+  color: transparent;
+  vertical-align: top;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.icon_hamburger {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e9e9e9;
+  background-color: #f1f1f1;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.icon_login {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e9e9e9;
+  background-color: #f1f1f1;
 }
 
-.App-link {
-  color: #61dafb;
+.icon_register {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e9e9e9;
+  background-color: #f1f1f1;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.icon_close {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e9e9e9;
+  background-color: #f1f1f1;
+}
+
+/* container
+---------- ---------- ---------- ---------- ---------- */
+.container {
+  position: relative;
+  /* margin-top: 24px; */
+  /* padding-top: 68px; */
+  /* padding: 113px 0 24px 0; */
+}
+
+/* hgroup
+---------- ---------- ---------- ---------- ---------- */
+/* .hgroup {
+  padding: 0 12px;
+} */
+
+/* group_category
+---------- ---------- ---------- ---------- ---------- */
+/* .group_category + .section_global {
+  margin-top: 12px;
+} */
+
+/* group_quick
+---------- ---------- ---------- ---------- ---------- */
+.group_quick {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  left: 12px;
+  z-index: 10;
+  height: 56px;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid #e9e9e9;
+  box-sizing: border-box;
+  background-color: #fff;
+  text-align: center;
+}
+
+.group_quick .inner_quick {
+  margin-left: -12px;
+}
+
+.group_quick .button_global {
+  margin-left: 12px;
+}
+
+/* group_horizontal
+---------- ---------- ---------- ---------- ---------- */
+/* .group_horizontal {
+  margin: 12px 0 0;
+} */
+
+/* list_horizontal
+---------- ---------- ---------- ---------- ---------- */
+.list_horizontal > li + li {
+  margin-top: 12px;
+}
+
+.list_horizontal .link_horizontal {
+  display: block;
+}
+
+.list_horizontal .link_horizontal:after {
+  display: block;
+  clear: both;
+  content: '';
+}
+
+.list_horizontal .frame_horizontal {
+  float: left;
+  width: 100px;
+  /* height: 90px; */
+  height: 100px;
+  border-radius: 12px;
+  font-size: 1px;
+  color: transparent;
+  background-color: #f1f1f1;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.list_horizontal .frame_horizontal + .information_horizontal {
+  padding-left: 12px;
+}
+
+.list_horizontal .information_horizontal {
+  overflow: hidden;
+}
+
+/* information_horizontal
+---------- ---------- ---------- ---------- ---------- */
+.information_horizontal .title_horizontal {
+  display: block;
+  font-size: 14px;
+  word-break: break-all;
+}
+
+.information_horizontal .description_horizontal {
+  margin: 6px 0 0 -6px;
+}
+
+.information_horizontal .description_horizontal > li {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 12px;
+  vertical-align: top;
+}
+
+/* group_grade
+---------- ---------- ---------- ---------- ---------- */
+/* .group_grade {
+  padding: 0 12px;
+} */
+
+/* list_choice
+---------- ---------- ---------- ---------- ---------- */
+.list_choice {
+  margin: -10px 0 0 -10px;
+  font-size: 0;
+}
+
+.list_choice li {
+  display: inline-block;
+  width: 25%;
+  padding: 10px 0 0 10px;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+
+/* box_choice
+---------- ---------- ---------- ---------- ---------- */
+.box_choice {
+  position: relative;
+}
+
+.box_choice .input_choice {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  visibility: hidden;
+}
+
+.box_choice .label_choice {
+  display: block;
+  padding: 6px 0;
+  border: 1px solid #e9e9e9;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 1.4;
+  background-color: #fff;
+  text-align: center;
+  cursor: pointer;
+  webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.box_choice .input_choice:checked + .label_choice {
+  background-color: #f1f1f1;
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+/* group_pagination
+---------- ---------- ---------- ---------- ---------- */
+.group_pagination {
+  margin-top: 24px;
+}
+
+/* list_pagination
+---------- ---------- ---------- ---------- ---------- */
+.list_pagination {
+  font-size: 0;
+  text-align: center;
+}
+
+.list_pagination > li {
+  display: inline-block;
+}
+
+.list_pagination > li + li {
+  margin-left: 12px;
+}
+
+.list_pagination .link_pagination {
+  display: block;
+  min-width: 32px;
+  padding: 8px 4px;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.list_pagination .link_pagination.current {
+  font-weight: bold;
+  color: #000;
+  border: 1px solid #e9e9e9;
+  background-color: #f1f1f1;
+}
+
+/* footer
+---------- ---------- ---------- ---------- ---------- */
+.footer {
+  padding: 12px 12px 80px 12px;
+  background-color: #000;
+}
+
+.list_attribute {
+  font-size: 0;
+}
+
+.list_attribute > li {
+  position: relative;
+}
+
+.list_attribute > li + li {
+  margin-top: 12px;
+}
+
+.list_attribute .inner_half {
+  position: relative;
+}
+
+.list_attribute .title_attribute,
+.list_attribute .contents_attribute {
+  box-sizing: border-box;
+  font-size: 12px;
+}
+
+.list_attribute .title_attribute {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 30%;
+  padding: 12px 0;
+  border-radius: 12px;
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+.list_attribute .title_attribute .list_local li + li {
+  margin-top: 6px;
+}
+
+.list_attribute .outer_cell {
+  width: 100%;
+  height: 100%;
+}
+
+.list_attribute .contents_attribute {
+  display: block;
+  margin-left: 30%;
+  padding: 12px;
+}
+
+.list_attribute .contents_attribute .list_local {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e9e9e9;
+  box-sizing: border-box;
+}
+
+.list_attribute .emphasis_price {
+  font-style: normal;
 }

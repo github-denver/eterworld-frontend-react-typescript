@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Route } from 'react-router-dom'
+
+import './App.css'
+
+import Index from './pages/Index'
+import List from './pages/List'
+import Read from './pages/Read'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Route component={Index} path={['/', '/eternalcity']} exact />
+      <Route component={List} path={['/eternalcity/:service/:child/list', '/eternalcity/:service/:child/list/:number']} />
+      <Route component={Read} path={['/eternalcity/:service/:child/read', '/eternalcity/:service/:child/read/:number']} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
