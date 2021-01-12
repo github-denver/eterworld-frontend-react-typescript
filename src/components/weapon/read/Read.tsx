@@ -4,6 +4,8 @@ import styled, { css } from 'styled-components'
 
 import Frame from '@/components/common/frame/Frame'
 import Information from '@/components/common/information/Information'
+import Hgroup from '@/components/common/Hgroup'
+import Information2 from '@/components/common/Information'
 
 // import { Attributes } from '@/interfaces/padding.interfaces'
 
@@ -114,28 +116,21 @@ function Result({ attributes }: Attributes) {
 
   return (
     <Styled.horizontal padding={padding}>
-      <ul className="list_horizontal">
-        {list.map((currentValue: any, index: number) => {
-          return (
-            <li key={currentValue.number}>
-              <Link to={`/eternalcity/weapon/melee/read/${currentValue.number}?grade=${grade}`} className="link_horizontal">
-                <Frame attributes={{ thumbnail: currentValue.thumbnail, service: service, category: category, name: currentValue.name }} />
+      <Frame attributes={{ thumbnail: list[0].thumbnail, service: service, category: category, name: list[0].name }} />
 
-                <Information
-                  attributes={{
-                    name: currentValue.name,
-                    power: currentValue.power,
-                    critical: currentValue.critical,
-                    hit: currentValue.hit,
-                    shoot: currentValue.shoot,
-                    speed: currentValue.speed
-                  }}
-                />
-              </Link>
-            </li>
-          )
-        })}
-      </ul>
+      <Information
+        attributes={{
+          name: list[0].name,
+          power: list[0].power,
+          critical: list[0].critical,
+          hit: list[0].hit,
+          shoot: list[0].shoot,
+          speed: list[0].speed
+        }}
+      />
+
+      <Hgroup attributes={{ level: 4, title: '[CL] Gaia Rifle 정보를 확인할 수 있습니다.', invisible: false }} />
+      <Information2 attributes={{ data: list }} />
     </Styled.horizontal>
   )
 }

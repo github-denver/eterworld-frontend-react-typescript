@@ -60,9 +60,6 @@ const Navigation = styled.nav`
 `
 
 function Result() {
-  console.log('')
-  console.log('function Navigation () { .. }')
-
   return (
     <>
       <Navigation className="gnb">

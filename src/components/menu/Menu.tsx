@@ -6,43 +6,46 @@ import Navigation from '@/components/menu/Navigation'
 
 import { Attributes } from '@/interfaces/visible.interfaces'
 
-const Menu = styled.div`
-  text-align: left;
+interface State {
+  menu: any
+}
 
-  &,
-  .inner_menu {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    min-width: 320px;
-    margin: 0 auto;
-  }
+const Styled: State = {
+  menu: styled.div`
+    text-align: left;
 
-  .inner_menu {
-    overflow-x: hidden;
-    overflow-y: auto;
-    max-width: 640px;
-    padding-bottom: 40px;
-    background-color: #fff;
-  }
+    &,
+    .inner_menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      min-width: 320px;
+      margin: 0 auto;
+    }
 
-  .button_close {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-  }
-`
+    .inner_menu {
+      overflow-x: hidden;
+      overflow-y: auto;
+      max-width: 640px;
+      padding-bottom: 40px;
+      background-color: #fff;
+    }
+
+    .button_close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+    }
+  `
+}
 
 interface IProps_Square {
   visible: any
 }
 
 const Visible = React.memo(function Visible({ visible }: IProps_Square) {
-  console.log('')
-  console.log('function Menu () { .. } → const Visible = React.memo(function Visible({ visible }: IProps_Square) { .. }')
-
   return (
     <>
       <button type="button" className="button_global button_close" onClick={visible}>
@@ -53,22 +56,18 @@ const Visible = React.memo(function Visible({ visible }: IProps_Square) {
 })
 
 function Result({ attributes }: Attributes) {
-  console.log('')
   const { visible } = attributes
-  console.log('function Menu () { .. } → visible: ', visible)
 
   return (
-    <>
-      <Menu className="menu">
-        <div className="inner_menu">
-          <Profile />
+    <Styled.menu className="menu">
+      <div className="inner_menu">
+        <Profile />
 
-          <Navigation />
+        <Navigation />
 
-          <Visible visible={visible} />
-        </div>
-      </Menu>
-    </>
+        <Visible visible={visible} />
+      </div>
+    </Styled.menu>
   )
 }
 

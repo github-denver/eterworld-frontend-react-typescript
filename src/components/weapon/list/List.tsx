@@ -118,7 +118,7 @@ function Result({ attributes }: Attributes) {
         {list.map((currentValue: any, index: number) => {
           return (
             <li key={currentValue.number}>
-              <Link to={`/eternalcity/weapon/melee/read/${currentValue.number}?grade=${grade}`} className="link_horizontal">
+              <Link to={`/eternalcity/${service}/${category}/read/${currentValue.number}?grade=${grade}`} className="link_horizontal">
                 <Frame attributes={{ thumbnail: currentValue.thumbnail, service: service, category: category, name: currentValue.name }} />
 
                 <Information

@@ -1,38 +1,48 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import Hgroup from '@/components/common/Hgroup'
 
-const Category = styled.div`
-  /* position: fixed;
-  top: 56px;
-  right: 0;
-  left: 0;
-  z-index: 10; */
-  padding: 12px 0;
-  background-color: #fff;
+// import { Attributes } from '@/interfaces/padding.interfaces'
 
-  .list_category {
+interface Attributes {
+  [key: string]: any
+}
+
+interface State {
+  category: Function
+  list: Function
+  item: Function
+  link?: any
+}
+
+interface Props {
+  current: any
+}
+
+const Styled: State = {
+  category: styled.div`
+    padding: 12px 0;
+    background-color: #fff;
+  `,
+  list: styled.ul`
     overflow: auto;
-    /* padding: 0 12px; */
     font-size: 0;
     white-space: nowrap;
-  }
-
-  .list_category > li {
+  `,
+  item: styled.li`
     display: inline-block;
     position: relative;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     vertical-align: top;
-  }
 
-  .list_category > li + li {
-    padding-left: 12px;
-  }
-
-  .link_category {
+    & + & {
+      padding-left: 12px;
+    }
+  `,
+  link: styled(Link)`
     display: block;
     border-radius: 12px;
     padding: 6px 12px;
@@ -40,60 +50,92 @@ const Category = styled.div`
     font-weight: bold;
     color: gray;
     background-color: #f1f1f1;
-  }
 
-  .link_category.current {
-    color: #fff;
-    background-color: #000;
-  }
-`
+    ${(props: Props) => {
+      return (
+        props.current &&
+        css`
+          color: #fff;
+          background-color: #000;
+        `
+      )
+    }}
+  `
+}
 
-function Result() {
+function Item({ attributes }: Attributes) {
+  const { query, text, service, category, current } = attributes
+
+  let queryString = ''
+
+  query.map((currentValue: object, index: number) => {
+    for (const property in currentValue) {
+      if (property !== 'key') {
+        queryString += '='
+      }
+
+      queryString += `${query[index][property]}`
+    }
+  })
+
   return (
-    <>
-      <Category className="group_category">
-        <Hgroup attributes={{ level: 3, title: '전체 서비스' }} />
-
-        <ul className="list_category">
-          <li>
-            <Link to="/eternalcity/weapon/melee/list" className="link_category current">
-              근거리 무기
-            </Link>
-          </li>
-          <li>
-            <Link to="/eternalcity/weapon/ranged/list" className="link_category">
-              원거리 무기
-            </Link>
-          </li>
-          <li>
-            <Link to="/" className="link_category" onClick={() => alert('남성용 방어구')}>
-              남성용 방어구
-            </Link>
-          </li>
-          <li>
-            <Link to="/" className="link_category">
-              남성용 변이체 방어구
-            </Link>
-          </li>
-          <li>
-            <Link to="/" className="link_category">
-              여성용 방어구
-            </Link>
-          </li>
-          <li>
-            <Link to="/" className="link_category">
-              여성용 변이체 방어구
-            </Link>
-          </li>
-          <li>
-            <Link to="/" className="link_category">
-              액세서리
-            </Link>
-          </li>
-        </ul>
-      </Category>
-    </>
+    <Styled.item>
+      <Styled.link to={`/eternalcity/${service}/${category}/list?${queryString}`} current={category === current ? 1 : 0}>
+        {text}
+      </Styled.link>
+    </Styled.item>
   )
+}
+
+function List({ attributes }: Attributes) {
+  const { query, data, category } = attributes
+
+  return (
+    <Styled.list>
+      {data.map((currentValue: any, index: number) => {
+        return (
+          <Item
+            key={index}
+            attributes={{
+              query: query,
+              text: currentValue.text,
+              service: currentValue.service,
+              category: currentValue.category,
+              current: category
+            }}
+          />
+        )
+      })}
+    </Styled.list>
+  )
+}
+
+function Result({ location, attributes, stlyes }: Attributes) {
+  const pathname = location.pathname.split('/').filter((element: string) => {
+    return element !== null && element !== undefined && element !== ''
+  })
+
+  const category = pathname[2]
+
+  const assignment = useMemo(() => {
+    return Object.assign({}, defaultProps.attributes, attributes)
+  }, [attributes])
+
+  const { data, query } = useMemo(() => {
+    return assignment
+  }, [assignment])
+
+  return (
+    <Styled.category style={stlyes}>
+      <Hgroup attributes={{ level: 3, title: '전체 서비스' }} />
+
+      <List attributes={{ data: data, query: query, category: category }} />
+    </Styled.category>
+  )
+}
+
+const defaultProps = {
+  attributes: {}
 }
 
 export default React.memo(Result)
