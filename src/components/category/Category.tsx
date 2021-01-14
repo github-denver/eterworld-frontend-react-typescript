@@ -66,9 +66,7 @@ const Styled: State = {
 function Item({ attributes }: Attributes) {
   const { query, text, service, category, current } = attributes
 
-  let queryString = ''
-
-  query.map((currentValue: object, index: number) => {
+  let queryString = query.map((currentValue: object, index: number) => {
     for (const property in currentValue) {
       if (property !== 'key') {
         queryString += '='
@@ -76,6 +74,8 @@ function Item({ attributes }: Attributes) {
 
       queryString += `${query[index][property]}`
     }
+
+    return queryString
   })
 
   return (
@@ -110,7 +110,7 @@ function List({ attributes }: Attributes) {
   )
 }
 
-function Result({ location, attributes, stlyes }: Attributes) {
+function Result({ location, attributes, style }: Attributes) {
   const pathname = location.pathname.split('/').filter((element: string) => {
     return element !== null && element !== undefined && element !== ''
   })
@@ -126,7 +126,7 @@ function Result({ location, attributes, stlyes }: Attributes) {
   }, [assignment])
 
   return (
-    <Styled.category style={stlyes}>
+    <Styled.category style={style}>
       <Hgroup attributes={{ level: 3, title: '전체 서비스' }} />
 
       <List attributes={{ data: data, query: query, category: category }} />

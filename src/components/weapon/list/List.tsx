@@ -8,20 +8,14 @@ import Information from '@/components/common/information/Information'
 // import { Attributes } from '@/interfaces/padding.interfaces'
 
 interface Attributes {
-  attributes: {
-    loading: any
-    error: any
-    service: any
-    category: any
-    list: any
-    pagination: any
-    grade: any
-    padding: boolean
-  }
+  [key: string]: any
 }
 
 interface State {
-  horizontal: any
+  wrapper: any
+  list: any
+  item: any
+  link: any
 }
 
 interface Props {
@@ -29,62 +23,40 @@ interface Props {
 }
 
 const Styled: State = {
-  horizontal: styled.div`
-    .list_horizontal > li + li {
-      margin-top: 12px;
-    }
-
-    .list_horizontal .link_horizontal {
-      display: block;
-    }
-
-    .list_horizontal .link_horizontal:after {
-      display: block;
-      clear: both;
-      content: '';
-    }
-
-    .list_horizontal .frame_horizontal {
-      float: left;
-    }
-
-    /* .list_horizontal .thumbnail_horizontal {
-      display: block;
-      width: 100%;
-      height: 100%;
-      background-position: 50% 50%;
-      background-repeat: no-repeat;
-    } */
-
-    .list_horizontal .thumbnail_horizontal {
-      max-width: 100%;
-    }
-
-    .list_horizontal .frame_horizontal + .information_horizontal {
-      padding-left: 12px;
-    }
-
-    .list_horizontal .information_horizontal {
-      overflow: hidden;
-    }
-
-    ${(props: Props) => {
+  wrapper: styled.div`
+    /* ${(props: Props) => {
       return (
         props.padding &&
         css`
           padding: 12px;
         `
       )
-    }}
+    }} */
+  `,
+  list: styled.ul``,
+  item: styled.li`
+    & + & {
+      margin-top: 12px;
+    }
+  `,
+  link: styled(Link)`
+    display: block;
+
+    &:after {
+      display: block;
+      clear: both;
+      content: '';
+    }
   `
 }
 
-function Result({ attributes }: Attributes) {
+function Result({ attributes, style }: Attributes) {
   const assignment = useMemo(() => {
     return Object.assign({}, defaultProps.attributes, attributes)
   }, [attributes])
 
-  const { loading, error, service, category, list, pagination, grade, padding } = useMemo(() => {
+  // const { loading, error, service, category, list, pagination, grade, padding } = useMemo(() => {
+  const { loading, error, service, category, list, grade } = useMemo(() => {
     return assignment
   }, [assignment])
 
@@ -113,12 +85,12 @@ function Result({ attributes }: Attributes) {
   }
 
   return (
-    <Styled.horizontal padding={padding}>
-      <ul className="list_horizontal">
+    <Styled.wrapper style={style}>
+      <Styled.list>
         {list.map((currentValue: any, index: number) => {
           return (
-            <li key={currentValue.number}>
-              <Link to={`/eternalcity/${service}/${category}/read/${currentValue.number}?grade=${grade}`} className="link_horizontal">
+            <Styled.item key={currentValue.number}>
+              <Styled.link to={`/eternalcity/${service}/${category}/read/${currentValue.number}?grade=${grade}`}>
                 <Frame attributes={{ thumbnail: currentValue.thumbnail, service: service, category: category, name: currentValue.name }} />
 
                 <Information
@@ -131,12 +103,12 @@ function Result({ attributes }: Attributes) {
                     speed: currentValue.speed
                   }}
                 />
-              </Link>
-            </li>
+              </Styled.link>
+            </Styled.item>
           )
         })}
-      </ul>
-    </Styled.horizontal>
+      </Styled.list>
+    </Styled.wrapper>
   )
 }
 

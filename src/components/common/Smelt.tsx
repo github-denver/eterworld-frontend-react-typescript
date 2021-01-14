@@ -1,9 +1,14 @@
-import React, { useMemo } from 'react'
+import React from 'react'
+// import React, { useMemo } from 'react'
 import styled, { css } from 'styled-components'
 
 import Choice from '@/components/common/Choice'
 
-import { Attributes } from '@/interfaces/padding.interfaces'
+// import { Attributes } from '@/interfaces/padding.interfaces'
+
+interface Attributes {
+  [key: string]: any
+}
 
 interface State {
   smelt: any
@@ -139,7 +144,7 @@ function Item() {
             </strong>
 
             <div className="contents_attribute">
-              <Choice attributes={{ custom: smelt }} />
+              <Choice attributes={{ label: 'smelt', custom: smelt, length: 3 }} />
             </div>
           </li>
         )
@@ -148,26 +153,24 @@ function Item() {
   )
 }
 
-function Result({ attributes, children }: Attributes) {
-  const assignment = useMemo(() => {
-    return Object.assign({}, defaultProps.attributes, attributes)
-  }, [attributes])
+function Result({ attributes, style }: Attributes) {
+  // const assignment = useMemo(() => {
+  //   return Object.assign({}, defaultProps.attributes, attributes)
+  // }, [attributes])
 
-  const { padding } = useMemo(() => {
-    return assignment
-  }, [assignment])
+  // const { styles } = useMemo(() => {
+  //   return assignment
+  // }, [assignment])
 
   return (
-    <Styled.smelt padding={padding}>
+    <Styled.smelt style={style}>
       <Item />
     </Styled.smelt>
   )
 }
 
-const defaultProps = {
-  attributes: {
-    padding: false
-  }
-}
+// const defaultProps = {
+//   attributes: {}
+// }
 
 export default Result

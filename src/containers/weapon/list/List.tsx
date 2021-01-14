@@ -9,8 +9,8 @@ import Rows from '@/components/weapon/list/List'
 import { boardList, boardListInitial } from '@/modules/board/list'
 
 const Result = (props: any) => {
-  const { attributes } = props
-  const { history, location, match } = props
+  const { attributes, style } = props
+  const { location } = props
 
   const { loading, error, list, pagination } = useSelector(({ boardList, loading }: any) => {
     const temp = {
@@ -56,6 +56,7 @@ const Result = (props: any) => {
   if (!grade) {
     grade = 1
   }
+  console.log('containers → common → weapon → list → List.tsx → grade: ', grade)
 
   useEffect(() => {
     dispatch(boardList({ service: service, category: category, number, grade: grade, select: '', keyword: '' }))
@@ -65,7 +66,7 @@ const Result = (props: any) => {
 
       dispatch(boardListInitial())
     }
-  }, [dispatch, category, number, grade])
+  }, [dispatch, service, category, number, grade])
 
   return (
     <Rows
@@ -79,6 +80,7 @@ const Result = (props: any) => {
         grade: grade,
         padding: attributes.padding
       }}
+      style={style}
     />
   )
 }

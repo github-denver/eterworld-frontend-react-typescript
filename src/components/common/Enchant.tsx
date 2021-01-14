@@ -1,9 +1,14 @@
-import React, { useMemo } from 'react'
+import React from 'react'
+// import React, { useMemo } from 'react'
 import styled, { css } from 'styled-components'
 
 import Choice from '@/components/common/Choice'
 
-import { Attributes } from '@/interfaces/padding.interfaces'
+// import { Attributes } from '@/interfaces/padding.interfaces'
+
+interface Attributes {
+  [key: string]: any
+}
 
 interface State {
   enchant: any
@@ -136,7 +141,7 @@ function Item({ grade }: any) {
 
         <div className="contents_attribute">
           <ul className="list_choice type_enchant">
-            <Choice attributes={{ prefix: '+' }} />
+            <Choice attributes={{ label: 'normal', prefix: '+', length: 3 }} />
           </ul>
         </div>
       </li>
@@ -150,7 +155,7 @@ function Item({ grade }: any) {
 
         <div className="contents_attribute">
           <ul className="list_choice type_enchant">
-            <Choice attributes={{ prefix: 'MAX +' }} />
+            <Choice attributes={{ label: 'max', prefix: 'MAX +', length: 3 }} />
           </ul>
         </div>
       </li>
@@ -158,26 +163,24 @@ function Item({ grade }: any) {
   )
 }
 
-function Result({ attributes, children }: Attributes) {
-  const assignment = useMemo(() => {
-    return Object.assign({}, defaultProps.attributes, attributes)
-  }, [attributes])
+function Result({ attributes, style, children }: Attributes) {
+  // const assignment = useMemo(() => {
+  //   return Object.assign({}, defaultProps.attributes, attributes)
+  // }, [attributes])
 
-  const { padding } = useMemo(() => {
-    return assignment
-  }, [assignment])
+  // const { styles } = useMemo(() => {
+  //   return assignment
+  // }, [assignment])
 
   return (
-    <Styled.enchant padding={padding}>
+    <Styled.enchant style={style}>
       <Item grade={grade} />
     </Styled.enchant>
   )
 }
 
-const defaultProps = {
-  attributes: {
-    padding: false
-  }
-}
+// const defaultProps = {
+//   attributes: {}
+// }
 
 export default Result

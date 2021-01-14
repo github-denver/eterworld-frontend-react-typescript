@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import styled from 'styled-components'
 
 const Frame = styled.span`
-  display: inline-block;
+  float: left;
   width: 100px;
   height: 100px;
   padding: 6px;
@@ -17,10 +17,6 @@ const Frame = styled.span`
   .outer_cell {
     height: 100%;
     margin: 0 auto;
-  }
-
-  & + .information_horizontal {
-    padding-left: 12px;
   }
 `
 
@@ -44,13 +40,13 @@ function Result({ attributes }: Attributes) {
 
   return (
     <>
-      <Frame className="frame_horizontal">
+      <Frame>
         <div className="outer_cell">
           <div className="inner_cell">
             <img
               src={`http://localhost:3000/eternalcity/images/${service}/${category}/${encodeURIComponent(thumbnail)}`}
               alt={`${name}`}
-              className="thumbnail_horizontal"
+              className="thumbnail"
             />
           </div>
         </div>

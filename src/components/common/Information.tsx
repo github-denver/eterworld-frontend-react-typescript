@@ -1,18 +1,15 @@
-import React, { ReactNode, useMemo } from 'react'
+import React, { useMemo, ReactNode } from 'react'
 import styled, { css } from 'styled-components'
 
 // import { Attributes } from '@/interfaces/padding.interfaces'
 
 interface Attributes {
-  attributes: {
-    data: object
-    padding?: boolean
-  }
+  [key: string]: any
   children?: ReactNode
 }
 
 interface State {
-  information: any
+  list: any
 }
 
 interface Props {
@@ -20,7 +17,7 @@ interface Props {
 }
 
 const Styled: State = {
-  information: styled.ul`
+  list: styled.ul`
     font-size: 0;
 
     .outer_cell {
@@ -128,7 +125,7 @@ const Styled: State = {
   `
 }
 
-const information = ['가격', '분류', '등급', '공격력', '치명타', ['명중률', '탄착률'], '무게', '속도', '크기']
+// const information = ['가격', '분류', '등급', '공격력', '치명타', ['명중률', '탄착률'], '무게', '속도', '크기']
 
 function Item({ attributes }: Attributes) {
   interface tplotOptions {
@@ -260,12 +257,12 @@ function Item({ attributes }: Attributes) {
   )
 }
 
-function Result({ attributes, children }: Attributes) {
+function Result({ attributes, style, children }: Attributes) {
   const assignment = useMemo(() => {
     return Object.assign({}, defaultProps.attributes, attributes)
   }, [attributes])
 
-  const { data, padding } = useMemo(() => {
+  const { data } = useMemo(() => {
     return assignment
   }, [assignment])
 
@@ -276,16 +273,14 @@ function Result({ attributes, children }: Attributes) {
   }
 
   return (
-    <Styled.information padding={padding}>
+    <Styled.list style={style}>
       <Item attributes={{ data: data }} />
-    </Styled.information>
+    </Styled.list>
   )
 }
 
 const defaultProps = {
-  attributes: {
-    padding: false
-  }
+  attributes: {}
 }
 
 export default Result

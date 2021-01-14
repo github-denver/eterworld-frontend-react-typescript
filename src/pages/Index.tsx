@@ -2,7 +2,7 @@ import React from 'react'
 
 import Header from '@/containers/header/Header'
 import Hgroup from '@/components/common/Hgroup'
-import Category from '@/components/category/Category'
+// import Category from '@/components/category/Category'
 import Swiper from '@/components/slide/Swiper'
 // import Horizontal from '@/components/common/Horizontal'
 // import Quick from '@/components/common/Quick'

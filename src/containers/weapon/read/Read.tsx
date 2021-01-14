@@ -9,8 +9,8 @@ import Read from '@/components/weapon/read/Read'
 import { weaponRead, weaponReadInitial } from '@/modules/board/read'
 
 const Result = (props: any) => {
-  const { attributes } = props
-  const { history, location, match } = props
+  const { attributes, style } = props
+  const { location } = props
 
   const { loading, error, list, pagination } = useSelector(({ weaponRead, loading }: any) => {
     const temp = {
@@ -65,7 +65,7 @@ const Result = (props: any) => {
 
       dispatch(weaponReadInitial())
     }
-  }, [dispatch, category, number, grade])
+  }, [dispatch, service, category, number, grade])
 
   return (
     <Read
@@ -79,6 +79,7 @@ const Result = (props: any) => {
         grade: prefixed.grade,
         padding: attributes.padding
       }}
+      style={style}
     />
   )
 }

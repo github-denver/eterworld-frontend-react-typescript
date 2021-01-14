@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react'
+import React from 'react'
+// import React, { useMemo } from 'react'
 
 import styled, { css } from 'styled-components'
 
@@ -118,14 +119,14 @@ const Styled: State = {
       font-style: normal;
     }
 
-    ${(props: Props) => {
+    /* ${(props: Props) => {
       return (
         props.padding &&
         css`
           padding: 12px;
         `
       )
-    }}
+    }} */
   `
 }
 
@@ -144,7 +145,7 @@ function Item({ location, attributes }: Attributes) {
         <div className="contents_attribute">
           <div className="outer_cell">
             <div className="inner_cell">
-              <Choice location={location} attributes={{ grade123: grade, custom: ['-5%', '0%', '+5%'] }} stlyes={{ padding: '12px' }} />
+              <Choice location={location} attributes={{ label: 'tax', grade123: grade, custom: ['-5%', '0%', '+5%'], length: 3 }} />
             </div>
           </div>
         </div>
@@ -215,34 +216,30 @@ function Item({ location, attributes }: Attributes) {
   )
 }
 
-function Result({ location, attributes }: Attributes) {
+function Result({ location, attributes, style }: Attributes) {
   const prefixed = qs.parse(location.search, {
     ignoreQueryPrefix: true
   })
-  console.log('prefixed.grade: ', prefixed.grade)
-  console.log('!prefixed.grade: ', !prefixed.grade)
-  console.log('!!prefixed.grade: ', !!prefixed.grade)
 
   const grade = !!prefixed.grade ? prefixed.grade : 1
-  console.log('grade: ', grade)
 
-  const assignment = useMemo(() => {
-    return Object.assign({}, defaultProps.attributes, attributes)
-  }, [attributes])
+  // const assignment = useMemo(() => {
+  //   return Object.assign({}, defaultProps.attributes, attributes)
+  // }, [attributes])
 
-  const { padding } = useMemo(() => {
-    return assignment
-  }, [assignment])
+  // const { styles } = useMemo(() => {
+  //   return assignment
+  // }, [assignment])
 
   return (
-    <Styled.tax padding={padding}>
+    <Styled.tax style={style}>
       <Item location={location} attributes={{ grade: grade }} />
     </Styled.tax>
   )
 }
 
-const defaultProps = {
-  attributes: {}
-}
+// const defaultProps = {
+//   attributes: {}
+// }
 
 export default Result

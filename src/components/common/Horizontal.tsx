@@ -44,11 +44,11 @@ const Styled: State = {
       content: '';
     }
 
-    .list_horizontal .frame_horizontal {
+    .list_horizontal .frame {
       float: left;
     }
 
-    /* .list_horizontal .thumbnail_horizontal {
+    /* .list_horizontal .thumbnail {
       display: block;
       width: 100%;
       height: 100%;
@@ -56,11 +56,11 @@ const Styled: State = {
       background-repeat: no-repeat;
     } */
 
-    .list_horizontal .thumbnail_horizontal {
+    .list_horizontal .thumbnail {
       max-width: 100%;
     }
 
-    .list_horizontal .frame_horizontal + .information_horizontal {
+    .list_horizontal .frame + .information_horizontal {
       padding-left: 12px;
     }
 

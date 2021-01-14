@@ -12,43 +12,36 @@ import Smelt from '@/components/common/Smelt'
 import Enchant from '@/components/common/Enchant'
 import Footer from '@/components/footer/Footer'
 
-import navigation from '@/utility/navigation'
+// import navigation from '@/utility/navigation'
 
-const func = (service: any, child: any, navigation: any) => {
-  let result = []
+// const func = (service: any, child: any, navigation: any) => {
+//   let result = []
 
-  loop: for (let i in navigation) {
-    for (let j in navigation[i].children) {
-      if (navigation[i].children[j].category === child) {
-        result = navigation[i].children
+//   loop: for (let i in navigation) {
+//     for (let j in navigation[i].children) {
+//       if (navigation[i].children[j].category === child) {
+//         result = navigation[i].children
 
-        break loop
-      }
-    }
-  }
+//         break loop
+//       }
+//     }
+//   }
 
-  return result
-}
+//   return result
+// }
 
-function Result({ history, location, match }: any) {
+function Result({ location, match }: any) {
   const service = match.params.service
-  console.log('service: ', service)
 
-  const child = match.params.child
-  console.log('child: ', child)
+  // const child = match.params.child
 
-  const result = func(service, child, navigation)
-  console.log('result: ', result)
+  // const result = func(service, child, navigation)
 
   const prefixed = qs.parse(location.search, {
     ignoreQueryPrefix: true
   })
-  console.log('prefixed.grade: ', prefixed.grade)
-  console.log('!prefixed.grade: ', !prefixed.grade)
-  console.log('!!prefixed.grade: ', !!prefixed.grade)
 
   const grade = !!prefixed.grade ? prefixed.grade : 1
-  console.log('grade: ', grade)
 
   return (
     <>
@@ -80,20 +73,20 @@ function Result({ history, location, match }: any) {
                 }
               ]
             }}
-            stlyes={{ padding: '12px' }}
+            style={{ padding: '12px' }}
           />
 
-          <Hgroup attributes={{ level: 3, title: '근거리 무기', invisible: false, padding: true }} />
-          <Read location={location} attributes={{ service: service, padding: true }} />
+          <Hgroup attributes={{ level: 3, title: '근거리 무기', invisible: false }} style={{ padding: '12px 12px 0' }} />
+          <Read location={location} attributes={{ service: service }} style={{ padding: '12px 12px 0' }} />
 
-          <Hgroup attributes={{ level: 3, title: '업그레이드 비용', invisible: false, padding: true }} />
-          <Tax location={location} attributes={{ padding: true }} />
+          <Hgroup attributes={{ level: 3, title: '업그레이드 비용', invisible: false }} style={{ padding: '24px 12px 0' }} />
+          <Tax location={location} style={{ padding: '12px 12px 0' }} />
 
-          <Hgroup attributes={{ level: 3, title: '업그레이드 단계', invisible: false, padding: true }} />
-          <Smelt attributes={{ padding: true }} />
+          <Hgroup attributes={{ level: 3, title: '업그레이드 단계', invisible: false }} style={{ padding: '24px 12px 0' }} />
+          <Smelt style={{ padding: '12px 12px 0' }} />
 
-          <Hgroup attributes={{ level: 3, title: '강화 단계', invisible: false, padding: true }} />
-          <Enchant attributes={{ padding: true }} />
+          <Hgroup attributes={{ level: 3, title: '강화 단계', invisible: false }} style={{ padding: '24px 12px 0' }} />
+          <Enchant style={{ padding: '12px 12px 0' }} />
         </section>
 
         <Footer />

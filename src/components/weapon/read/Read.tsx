@@ -1,29 +1,21 @@
 import React, { useMemo } from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
 import Frame from '@/components/common/frame/Frame'
-import Information from '@/components/common/information/Information'
+import Quick from '@/components/common/information/Information'
 import Hgroup from '@/components/common/Hgroup'
-import Information2 from '@/components/common/Information'
+import Information from '@/components/common/Information'
 
 // import { Attributes } from '@/interfaces/padding.interfaces'
 
 interface Attributes {
-  attributes: {
-    loading: any
-    error: any
-    service: any
-    category: any
-    list: any
-    pagination: any
-    grade: any
-    padding: boolean
-  }
+  [key: string]: any
 }
 
 interface State {
-  horizontal: any
+  wrapper: any
+  group: any
 }
 
 interface Props {
@@ -31,7 +23,7 @@ interface Props {
 }
 
 const Styled: State = {
-  horizontal: styled.div`
+  wrapper: styled.div`
     .list_horizontal > li + li {
       margin-top: 12px;
     }
@@ -40,53 +32,31 @@ const Styled: State = {
       display: block;
     }
 
-    .list_horizontal .link_horizontal:after {
-      display: block;
-      clear: both;
-      content: '';
-    }
-
-    .list_horizontal .frame_horizontal {
-      float: left;
-    }
-
-    /* .list_horizontal .thumbnail_horizontal {
-      display: block;
-      width: 100%;
-      height: 100%;
-      background-position: 50% 50%;
-      background-repeat: no-repeat;
-    } */
-
-    .list_horizontal .thumbnail_horizontal {
-      max-width: 100%;
-    }
-
-    .list_horizontal .frame_horizontal + .information_horizontal {
-      padding-left: 12px;
-    }
-
-    .list_horizontal .information_horizontal {
-      overflow: hidden;
-    }
-
-    ${(props: Props) => {
+    /* ${(props: Props) => {
       return (
         props.padding &&
         css`
           padding: 12px;
         `
       )
-    }}
+    }} */
+  `,
+  group: styled.div`
+    &:after {
+      display: block;
+      clear: both;
+      content: '';
+    }
   `
 }
 
-function Result({ attributes }: Attributes) {
+function Result({ attributes, style }: Attributes) {
   const assignment = useMemo(() => {
     return Object.assign({}, defaultProps.attributes, attributes)
   }, [attributes])
 
-  const { loading, error, service, category, list, pagination, grade, padding } = useMemo(() => {
+  // const { loading, error, service, category, list, pagination, grade, padding } = useMemo(() => {
+  const { loading, error, service, category, list } = useMemo(() => {
     return assignment
   }, [assignment])
 
@@ -115,30 +85,30 @@ function Result({ attributes }: Attributes) {
   }
 
   return (
-    <Styled.horizontal padding={padding}>
-      <Frame attributes={{ thumbnail: list[0].thumbnail, service: service, category: category, name: list[0].name }} />
+    <Styled.wrapper style={style}>
+      <Styled.group>
+        <Frame attributes={{ thumbnail: list[0].thumbnail, service: service, category: category, name: list[0].name }} />
 
-      <Information
-        attributes={{
-          name: list[0].name,
-          power: list[0].power,
-          critical: list[0].critical,
-          hit: list[0].hit,
-          shoot: list[0].shoot,
-          speed: list[0].speed
-        }}
-      />
+        <Quick
+          attributes={{
+            name: list[0].name,
+            power: list[0].power,
+            critical: list[0].critical,
+            hit: list[0].hit,
+            shoot: list[0].shoot,
+            speed: list[0].speed
+          }}
+        />
+      </Styled.group>
 
-      <Hgroup attributes={{ level: 4, title: '[CL] Gaia Rifle 정보를 확인할 수 있습니다.', invisible: false }} />
-      <Information2 attributes={{ data: list }} />
-    </Styled.horizontal>
+      <Hgroup attributes={{ level: 4, title: '[CL] Gaia Rifle 정보를 확인할 수 있습니다.', invisible: false }} style={{ padding: '24px 0 0' }} />
+      <Information attributes={{ data: list }} style={{ padding: '12px 0 0' }} />
+    </Styled.wrapper>
   )
 }
 
 const defaultProps = {
-  attributes: {
-    padding: false
-  }
+  attributes: {}
 }
 
 export default Result
