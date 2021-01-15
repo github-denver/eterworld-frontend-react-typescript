@@ -61,7 +61,7 @@ const Result = (props: any) => {
     dispatch(boardList({ category: category, number, grade: grade, select: '', keyword: '' }))
 
     return () => {
-      console.log('board/BOARD_LIST 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
+      console.log('containers → common → Horizontal.tsx → 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
 
       dispatch(boardListInitial())
     }

@@ -1,10 +1,7 @@
-import React from 'react'
-// import React, { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import styled, { css } from 'styled-components'
 
 import Choice from '@/components/common/Choice'
-
-// import { Attributes } from '@/interfaces/padding.interfaces'
 
 interface Attributes {
   [key: string]: any
@@ -127,60 +124,69 @@ const Styled: State = {
   `
 }
 
-const grade = ['일반', 'MAX']
+const reinforce = [
+  { text: '+0', rate: 0, checked: true },
+  { text: '+1', rate: 1, checked: false },
+  { text: '+2', rate: 2, checked: false },
+  { text: '+3', rate: 3, checked: false },
+  { text: '+4', rate: 4, checked: false },
+  { text: '+5', rate: 5, checked: false },
+  { text: '+6', rate: 6, checked: false },
+  { text: '+7', rate: 7, checked: false },
+  { text: '+8', rate: 8, checked: false },
+  { text: '+9', rate: 9, checked: false },
+  { text: 'MAX +0', rate: 0, checked: false },
+  { text: 'MAX +1', rate: 1, checked: false },
+  { text: 'MAX +2', rate: 1, checked: false },
+  { text: 'MAX +3', rate: 3, checked: false },
+  { text: 'MAX +4', rate: 3, checked: false },
+  { text: 'MAX +5', rate: 3, checked: false },
+  { text: 'MAX +6', rate: 6, checked: false },
+  { text: 'MAX +7', rate: 6, checked: false },
+  { text: 'MAX +8', rate: 6, checked: false },
+  { text: 'MAX +9', rate: 10, checked: false }
+]
 
-function Item({ grade }: any) {
+const Item = React.memo(function Item({ attributes }: any) {
+  const { power, normal, handler } = attributes
+
   return (
     <>
-      <li key={1}>
+      <li>
         <strong className="title_attribute">
           <div className="outer_cell">
-            <div className="inner_cell">{grade[0]}</div>
+            <div className="inner_cell">일반</div>
           </div>
         </strong>
 
         <div className="contents_attribute">
           <ul className="list_choice type_enchant">
-            <Choice attributes={{ label: 'normal', prefix: '+', length: 3 }} />
-          </ul>
-        </div>
-      </li>
-
-      <li key={2}>
-        <strong className="title_attribute">
-          <div className="outer_cell">
-            <div className="inner_cell">{grade[1]}</div>
-          </div>
-        </strong>
-
-        <div className="contents_attribute">
-          <ul className="list_choice type_enchant">
-            <Choice attributes={{ label: 'max', prefix: 'MAX +', length: 3 }} />
+            <Choice attributes={{ type: 'enchant', label: 'enchant', data: reinforce, normal, event: handler['body'] }} />
           </ul>
         </div>
       </li>
     </>
   )
-}
+})
 
 function Result({ attributes, style, children }: Attributes) {
-  // const assignment = useMemo(() => {
-  //   return Object.assign({}, defaultProps.attributes, attributes)
-  // }, [attributes])
+  const assignment = useMemo(() => {
+    return Object.assign({}, defaultProps.attributes, attributes)
+  }, [attributes])
 
-  // const { styles } = useMemo(() => {
-  //   return assignment
-  // }, [assignment])
+  const { power, normal, handler } = useMemo(() => {
+    return assignment
+  }, [assignment])
 
   return (
     <Styled.enchant style={style}>
-      <Item grade={grade} />
+      <Item attributes={{ power, normal, handler }} />
     </Styled.enchant>
   )
 }
 
-// const defaultProps = {
-//   attributes: {}
-// }
+const defaultProps = {
+  attributes: {}
+}
 
-export default Result
+export default React.memo(Result)

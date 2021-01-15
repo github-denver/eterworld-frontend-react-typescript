@@ -4,30 +4,27 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 
 import qs from 'qs'
 
-import Read from '@/components/weapon/read/Read'
+import Tax from '@/components/common/Tax'
 
 import { weaponRead, weaponReadInitial } from '@/modules/board/read'
 
 const Result = (props: any) => {
-  const { attributes, style } = props
+  const { style } = props
   const { location } = props
 
-  const { loading, error, list, pagination } = useSelector(({ weaponRead, loading }: any) => {
+  const { loading, error, list } = useSelector(({ weaponRead, loading }: any) => {
     const temp = {
-      weaponRead: '',
-      pagination: ''
+      weaponRead: ''
     }
 
     if (weaponRead.data !== null) {
       temp.weaponRead = weaponRead.data
-      temp.pagination = weaponRead.data.pagination
     }
 
     return {
       loading: loading['board/WEAPON_READ'],
       error: weaponRead.error,
-      list: temp.weaponRead,
-      pagination: temp.pagination
+      list: temp.weaponRead
     }
   }, shallowEqual)
 
@@ -61,24 +58,19 @@ const Result = (props: any) => {
     dispatch(weaponRead({ service: service, category: category, number, grade: grade, select: '', keyword: '' }))
 
     return () => {
-      console.log('containers → weapon → read → Read.tsx → 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
+      console.log('components → common → Tax.tsx → 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
 
       dispatch(weaponReadInitial())
     }
   }, [dispatch, service, category, number, grade])
 
   return (
-    <Read
+    <Tax
       location={location}
       attributes={{
         loading: loading,
         error: error,
-        service: service,
-        category: category,
-        list: list,
-        pagination: pagination,
-        grade: prefixed.grade,
-        padding: attributes.padding
+        list: list
       }}
       style={style}
     />

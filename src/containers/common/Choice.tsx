@@ -13,7 +13,7 @@ interface Attributes {
 const Result = (props: any) => {
   const { attributes, style } = props
   const { history, location } = props
-  const { label, prefix, grade, suffix, custom, padding } = attributes
+  const { label, prefix, grade, suffix, custom, length, checked } = attributes
 
   // const prefixed = qs.parse(location.search, {
   //   ignoreQueryPrefix: true
@@ -49,7 +49,8 @@ const Result = (props: any) => {
         grade: grade,
         suffix: suffix,
         custom: custom,
-        padding: padding,
+        length: length,
+        checked: checked,
         event: handleGradeChange
       }}
       style={style}

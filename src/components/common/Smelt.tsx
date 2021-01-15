@@ -1,5 +1,5 @@
-import React from 'react'
-// import React, { useMemo } from 'react'
+// import React from 'react'
+import React, { useMemo } from 'react'
 import styled, { css } from 'styled-components'
 
 import Choice from '@/components/common/Choice'
@@ -127,50 +127,58 @@ const Styled: State = {
   `
 }
 
-const grade = ['몸체', '총열', '조준경', '손잡이']
+// const type = ['몸체', '총열', '조준경', '손잡이']
 
-const smelt = ['기본', '초보', '숙련', '전문', '장인', '명인', 'O.T.']
+// const smelt = ['기본', '초보', '숙련', '전문', '장인', '명인', 'O.T.']
 
-function Item() {
+const Item = React.memo(function Item({ attributes }: Attributes) {
+  const { handler } = attributes
+
+  const upgrade = [
+    { text: '기본', rate: 0, checked: true },
+    { text: '초보', rate: 0.1, checked: false },
+    { text: '숙련', rate: 0.3, checked: false },
+    { text: '전문', rate: 0.5, checked: false },
+    { text: '장인', rate: 1, checked: false },
+    { text: '명인', rate: 2, checked: false },
+    { text: 'O.T.', rate: 3, checked: false }
+  ]
+
   return (
     <>
-      {grade.map((currentValue, index) => {
-        return (
-          <li key={index}>
-            <strong className="title_attribute">
-              <div className="outer_cell">
-                <div className="inner_cell">{currentValue}</div>
-              </div>
-            </strong>
+      <li>
+        <strong className="title_attribute">
+          <div className="outer_cell">
+            <div className="inner_cell">몸체</div>
+          </div>
+        </strong>
 
-            <div className="contents_attribute">
-              <Choice attributes={{ label: 'smelt', custom: smelt, length: 3 }} />
-            </div>
-          </li>
-        )
-      })}
+        <div className="contents_attribute">
+          <Choice attributes={{ type: 'upgrade', label: 'body', data: upgrade, event: handler['body'] }} />
+        </div>
+      </li>
     </>
   )
-}
+})
 
 function Result({ attributes, style }: Attributes) {
-  // const assignment = useMemo(() => {
-  //   return Object.assign({}, defaultProps.attributes, attributes)
-  // }, [attributes])
+  const assignment = useMemo(() => {
+    return Object.assign({}, defaultProps.attributes, attributes)
+  }, [attributes])
 
-  // const { styles } = useMemo(() => {
-  //   return assignment
-  // }, [assignment])
+  const { handler } = useMemo(() => {
+    return assignment
+  }, [assignment])
 
   return (
     <Styled.smelt style={style}>
-      <Item />
+      <Item attributes={{ handler: handler }} />
     </Styled.smelt>
   )
 }
 
-// const defaultProps = {
-//   attributes: {}
-// }
+const defaultProps = {
+  attributes: {}
+}
 
-export default Result
+export default React.memo(Result)

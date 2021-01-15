@@ -1,5 +1,5 @@
 // import React from 'react'
-import React, { useState, useCallback, useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
 
 import styled, { css } from 'styled-components'
 
@@ -130,30 +130,47 @@ const Styled: State = {
   `
 }
 
-const Item = React.memo(function Item({ attributes }: Attributes) {
-  const { price } = attributes
+function Item({ location, attributes }: Attributes) {
+  const { list, grade } = attributes
 
-  const [price123, setPrice] = useState(price)
+  const [price123, setPrice] = useState(list[0].price)
 
-  const currency = useCallback((value: any) => {
+  const currency = (value: any) => {
     return value.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, '$1,')
-  }, [])
+  }
 
-  const calculation = useCallback((event: any) => {
+  const calculation = (event: any) => {
+    console.log('list: ', list)
+    console.log('event.target.value: ', event.target.value)
+
+    let price = list[0].price
+    console.log('price: ', price)
+
     let value = event.target.value !== 'undefined' ? event.target.value : 0
+    console.log('value: ', value)
 
+    // let result = price * (10 / 100) * (1 + value / 100)
     let result = price * (1 + value / 100)
+    console.log('result: ', result)
 
     setPrice(() => {
       return result
     })
-  }, [])
 
-  const tax = [
-    { id: 'negative', text: '-5%', rate: -5, checked: false },
-    { id: 'default', text: '0%', rate: 0, checked: true },
-    { id: 'positive', text: '+5%', rate: 5, checked: false }
-  ]
+    // if (typeof event === 'number') {
+    //   price = event
+    //   value = 0
+    // }
+
+    // if (typeof event === 'object') {
+    //   price = this.price
+    //   value = (event.target.value !== 'undefined') ? event.target.value : 0
+    // }
+
+    // this.initial = price
+
+    // this.value = (this.initial * (10 / 100)) * (1 + (value / 100))
+  }
 
   return (
     <>
@@ -167,7 +184,7 @@ const Item = React.memo(function Item({ attributes }: Attributes) {
         <div className="contents_attribute">
           <div className="outer_cell">
             <div className="inner_cell">
-              {/* <Choice
+              <Choice
                 location={location}
                 attributes={{
                   label: 'tax',
@@ -180,9 +197,7 @@ const Item = React.memo(function Item({ attributes }: Attributes) {
                   ],
                   event: calculation
                 }}
-              /> */}
-
-              <Choice attributes={{ type: 'tax', label: 'tax', data: tax, event: calculation }} />
+              />
             </div>
           </div>
         </div>
@@ -251,27 +266,51 @@ const Item = React.memo(function Item({ attributes }: Attributes) {
       </li>
     </>
   )
-})
+}
 
 function Result({ location, attributes, style }: Attributes) {
-  // const prefixed = qs.parse(location.search, {
-  //   ignoreQueryPrefix: true
-  // })
+  const prefixed = qs.parse(location.search, {
+    ignoreQueryPrefix: true
+  })
 
-  // const grade = !!prefixed.grade ? prefixed.grade : 1
+  const grade = !!prefixed.grade ? prefixed.grade : 1
 
   const assignment = useMemo(() => {
     return Object.assign({}, defaultProps.attributes, attributes)
   }, [attributes])
 
-  const { price } = useMemo(() => {
+  const { loading, error, list } = useMemo(() => {
     return assignment
   }, [assignment])
+  console.log('list: ', list)
+
+  if (error) {
+    if (error.response && error.response.status === 404) {
+      console.log('components → common → Tax.tsx → 존재하지 않는 데이터입니다.')
+
+      return <p>components → common → Tax.tsx → 존재하지 않는 데이터입니다.</p>
+    }
+
+    console.log('components → common → Tax.tsx → 에러가 발생했어요!')
+
+    return <p>components → common → Tax.tsx → 에러가 발생했어요!</p>
+  }
+
+  if (loading || !list) {
+    console.log('components → common → Tax.tsx → 읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.')
+
+    return <p>components → common → Tax.tsx → 읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.</p>
+  }
+
+  if (!list) {
+    console.log('components → common → Tax.tsx → 목록이 존재하지 않습니다.')
+
+    return <p>components → common → Tax.tsx → 목록이 존재하지 않습니다.</p>
+  }
 
   return (
     <Styled.tax style={style}>
-      {/* <Item location={location} attributes={{ data: data, grade: grade }} /> */}
-      <Item attributes={{ price }} />
+      <Item location={location} attributes={{ list: list, grade: grade }} />
     </Styled.tax>
   )
 }
@@ -280,4 +319,4 @@ const defaultProps = {
   attributes: {}
 }
 
-export default React.memo(Result)
+export default Result

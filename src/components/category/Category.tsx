@@ -4,8 +4,6 @@ import styled, { css } from 'styled-components'
 
 import Hgroup from '@/components/common/Hgroup'
 
-// import { Attributes } from '@/interfaces/padding.interfaces'
-
 interface Attributes {
   [key: string]: any
 }
@@ -66,16 +64,18 @@ const Styled: State = {
 function Item({ attributes }: Attributes) {
   const { query, text, service, category, current } = attributes
 
-  let queryString = query.map((currentValue: object, index: number) => {
+  const queryString = query.map((currentValue: object, index: number) => {
+    let result: string = ''
+
     for (const property in currentValue) {
       if (property !== 'key') {
-        queryString += '='
+        result += '='
       }
 
-      queryString += `${query[index][property]}`
+      result += `${query[index][property]}`
     }
 
-    return queryString
+    return result
   })
 
   return (

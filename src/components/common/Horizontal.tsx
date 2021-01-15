@@ -90,26 +90,26 @@ function Result({ attributes }: Attributes) {
 
   if (error) {
     if (error.response && error.response.status === 404) {
-      console.log('존재하지 않는 데이터입니다.')
+      console.log('components → common → Horizontal.tsx → 존재하지 않는 데이터입니다.')
 
-      return <p>존재하지 않는 데이터입니다.</p>
+      return <p>components → common → Horizontal.tsx → 존재하지 않는 데이터입니다.</p>
     }
 
-    console.log('에러가 발생했어요!')
+    console.log('components → common → Horizontal.tsx → 에러가 발생했어요!')
 
-    return <p>에러가 발생했어요!</p>
+    return <p>components → common → Horizontal.tsx → 에러가 발생했어요!</p>
   }
 
   if (loading || !list) {
-    console.log('읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.')
+    console.log('components → common → Horizontal.tsx → 읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.')
 
-    return <p>읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.</p>
+    return <p>components → common → Horizontal.tsx → 읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.</p>
   }
 
   if (!list) {
-    console.log('목록이 존재하지 않습니다.')
+    console.log('components → common → Horizontal.tsx → 목록이 존재하지 않습니다.')
 
-    return <p>목록이 존재하지 않습니다.</p>
+    return <p>components → common → Horizontal.tsx → 목록이 존재하지 않습니다.</p>
   }
 
   return (

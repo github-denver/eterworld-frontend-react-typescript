@@ -6,6 +6,10 @@ import Frame from '@/components/common/frame/Frame'
 import Quick from '@/components/common/information/Information'
 import Hgroup from '@/components/common/Hgroup'
 import Information from '@/components/common/Information'
+// import Tax from '@/containers/common/Tax'
+// import Tax from '@/components/common/Tax'
+// import Smelt from '@/components/common/Smelt'
+// import Enchant from '@/components/common/Enchant'
 
 // import { Attributes } from '@/interfaces/padding.interfaces'
 
@@ -50,7 +54,7 @@ const Styled: State = {
   `
 }
 
-function Result({ attributes, style }: Attributes) {
+function Result({ location, attributes, style }: Attributes) {
   const assignment = useMemo(() => {
     return Object.assign({}, defaultProps.attributes, attributes)
   }, [attributes])
@@ -62,26 +66,26 @@ function Result({ attributes, style }: Attributes) {
 
   if (error) {
     if (error.response && error.response.status === 404) {
-      console.log('존재하지 않는 데이터입니다.')
+      console.log('components → weapon → read → Read.tsx → 존재하지 않는 데이터입니다.')
 
-      return <p>존재하지 않는 데이터입니다.</p>
+      return <p>components → weapon → read → Read.tsx → 존재하지 않는 데이터입니다.</p>
     }
 
-    console.log('에러가 발생했어요!')
+    console.log('components → weapon → read → Read.tsx → 에러가 발생했어요!')
 
-    return <p>에러가 발생했어요!</p>
+    return <p>components → weapon → read → Read.tsx → 에러가 발생했어요!</p>
   }
 
   if (loading || !list) {
-    console.log('읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.')
+    console.log('components → weapon → read → Read.tsx → 읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.')
 
-    return <p>읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.</p>
+    return <p>components → weapon → read → Read.tsx → 읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.</p>
   }
 
   if (!list) {
-    console.log('목록이 존재하지 않습니다.')
+    console.log('components → weapon → read → Read.tsx → 목록이 존재하지 않습니다.')
 
-    return <p>목록이 존재하지 않습니다.</p>
+    return <p>components → weapon → read → Read.tsx → 목록이 존재하지 않습니다.</p>
   }
 
   return (
@@ -102,7 +106,13 @@ function Result({ attributes, style }: Attributes) {
       </Styled.group>
 
       <Hgroup attributes={{ level: 4, title: '[CL] Gaia Rifle 정보를 확인할 수 있습니다.', invisible: false }} style={{ padding: '24px 0 0' }} />
-      <Information attributes={{ data: list }} style={{ padding: '12px 0 0' }} />
+      <Information
+        location={location}
+        attributes={{
+          data: list[0]
+        }}
+        style={{ padding: '12px 0 0' }}
+      />
     </Styled.wrapper>
   )
 }
@@ -111,4 +121,4 @@ const defaultProps = {
   attributes: {}
 }
 
-export default Result
+export default React.memo(Result)
