@@ -1,17 +1,10 @@
 import React, { useMemo } from 'react'
-// import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
 import Frame from '@/components/common/frame/Frame'
-import Quick from '@/components/common/information/Information'
+import Detail from '@/components/common/detail/Detail'
 import Hgroup from '@/components/common/Hgroup'
 import Information from '@/components/common/Information'
-// import Tax from '@/containers/common/Tax'
-// import Tax from '@/components/common/Tax'
-// import Smelt from '@/components/common/Smelt'
-// import Enchant from '@/components/common/Enchant'
-
-// import { Attributes } from '@/interfaces/padding.interfaces'
 
 interface Attributes {
   [key: string]: any
@@ -23,7 +16,7 @@ interface State {
 }
 
 interface Props {
-  padding: boolean
+  styles: boolean
 }
 
 const Styled: State = {
@@ -37,12 +30,7 @@ const Styled: State = {
     }
 
     /* ${(props: Props) => {
-      return (
-        props.padding &&
-        css`
-          padding: 12px;
-        `
-      )
+      return props.styles && css``
     }} */
   `,
   group: styled.div`
@@ -59,8 +47,7 @@ function Result({ location, attributes, style }: Attributes) {
     return Object.assign({}, defaultProps.attributes, attributes)
   }, [attributes])
 
-  // const { loading, error, service, category, list, pagination, grade, padding } = useMemo(() => {
-  const { loading, error, service, category, list } = useMemo(() => {
+  const { loading, error, service, category, read } = useMemo(() => {
     return assignment
   }, [assignment])
 
@@ -76,13 +63,13 @@ function Result({ location, attributes, style }: Attributes) {
     return <p>components → weapon → read → Read.tsx → 에러가 발생했어요!</p>
   }
 
-  if (loading || !list) {
+  if (loading || !read) {
     console.log('components → weapon → read → Read.tsx → 읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.')
 
     return <p>components → weapon → read → Read.tsx → 읽어들이는 중이거나 아직 데이터가 존재하지 않습니다.</p>
   }
 
-  if (!list) {
+  if (!read) {
     console.log('components → weapon → read → Read.tsx → 목록이 존재하지 않습니다.')
 
     return <p>components → weapon → read → Read.tsx → 목록이 존재하지 않습니다.</p>
@@ -91,16 +78,16 @@ function Result({ location, attributes, style }: Attributes) {
   return (
     <Styled.wrapper style={style}>
       <Styled.group>
-        <Frame attributes={{ thumbnail: list[0].thumbnail, service: service, category: category, name: list[0].name }} />
+        <Frame attributes={{ thumbnail: read.thumbnail, service: service, category: category, name: read.name }} />
 
-        <Quick
+        <Detail
           attributes={{
-            name: list[0].name,
-            power: list[0].power,
-            critical: list[0].critical,
-            hit: list[0].hit,
-            shoot: list[0].shoot,
-            speed: list[0].speed
+            name: read.name,
+            power: read.power,
+            critical: read.critical,
+            hit: read.hit,
+            shoot: read.shoot,
+            speed: read.speed
           }}
         />
       </Styled.group>
@@ -109,7 +96,7 @@ function Result({ location, attributes, style }: Attributes) {
       <Information
         location={location}
         attributes={{
-          data: list[0]
+          data: read
         }}
         style={{ padding: '12px 0 0' }}
       />

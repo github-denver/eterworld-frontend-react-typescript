@@ -6,17 +6,28 @@ import Header from '@/containers/header/Header'
 import Hgroup from '@/components/common/Hgroup'
 import Category from '@/components/category/Category'
 import Read from '@/containers/weapon/read/Read'
-// import Information from '@/components/common/Information'
 import Footer from '@/components/footer/Footer'
 
 function Result({ location, match }: any) {
-  const service = match.params.service
+  const pathname = location.pathname.split('/').filter((element: string) => {
+    return element !== null && element !== undefined && element !== ''
+  })
 
   const prefixed = qs.parse(location.search, {
     ignoreQueryPrefix: true
   })
 
-  const grade = !!prefixed.grade ? prefixed.grade : 1
+  const service = pathname[1]
+
+  const category = pathname[2]
+
+  const grade = !!prefixed.grade ? Number(prefixed.grade) : 1
+
+  let number = pathname.splice(-1)[0]
+
+  if (number === 'list' || number === 'read') {
+    number = 1
+  }
 
   return (
     <>
@@ -52,7 +63,7 @@ function Result({ location, match }: any) {
           />
 
           <Hgroup attributes={{ level: 3, title: '근거리 무기', invisible: false }} style={{ padding: '12px 12px 0' }} />
-          <Read location={location} attributes={{ service: service }} style={{ padding: '12px 12px 0' }} />
+          <Read location={location} attributes={{ service: service, category: category, grade: grade, number: number }} style={{ padding: '12px 12px 0' }} />
         </section>
 
         <Footer />

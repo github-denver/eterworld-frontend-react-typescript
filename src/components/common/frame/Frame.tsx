@@ -43,11 +43,7 @@ function Result({ attributes }: Attributes) {
       <Frame>
         <div className="outer_cell">
           <div className="inner_cell">
-            <img
-              src={`http://localhost:3000/eternalcity/images/${service}/${category}/${encodeURIComponent(thumbnail)}`}
-              alt={`${name}`}
-              className="thumbnail"
-            />
+            <img src={`http://localhost:3000/eternalcity/images/${service}/${category}/${encodeURIComponent(thumbnail)}`} alt={`${name}`} />
           </div>
         </div>
       </Frame>
@@ -56,9 +52,7 @@ function Result({ attributes }: Attributes) {
 }
 
 const defaultProps = {
-  attributes: {
-    thumbnail: ''
-  }
+  attributes: {}
 }
 
 export default Result

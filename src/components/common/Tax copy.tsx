@@ -140,18 +140,12 @@ function Item({ location, attributes }: Attributes) {
   }
 
   const calculation = (event: any) => {
-    console.log('list: ', list)
-    console.log('event.target.value: ', event.target.value)
-
     let price = list[0].price
-    console.log('price: ', price)
 
     let value = event.target.value !== 'undefined' ? event.target.value : 0
-    console.log('value: ', value)
 
     // let result = price * (10 / 100) * (1 + value / 100)
     let result = price * (1 + value / 100)
-    console.log('result: ', result)
 
     setPrice(() => {
       return result
@@ -184,7 +178,7 @@ function Item({ location, attributes }: Attributes) {
         <div className="contents_attribute">
           <div className="outer_cell">
             <div className="inner_cell">
-              <Choice
+              {/* <Choice
                 location={location}
                 attributes={{
                   label: 'tax',
@@ -197,7 +191,7 @@ function Item({ location, attributes }: Attributes) {
                   ],
                   event: calculation
                 }}
-              />
+              /> */}
             </div>
           </div>
         </div>
@@ -282,7 +276,6 @@ function Result({ location, attributes, style }: Attributes) {
   const { loading, error, list } = useMemo(() => {
     return assignment
   }, [assignment])
-  console.log('list: ', list)
 
   if (error) {
     if (error.response && error.response.status === 404) {

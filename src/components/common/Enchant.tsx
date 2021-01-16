@@ -8,40 +8,25 @@ interface Attributes {
 }
 
 interface State {
-  enchant: any
+  list: any
+  item: any
+  title: any
+  content: any
+  list2: any
+  item2: any
 }
 
 interface Props {
-  padding: boolean
+  styles: boolean
 }
 
 const Styled: State = {
-  enchant: styled.ul`
+  list: styled.ul`
     font-size: 0;
 
     .outer_cell {
       width: 100%;
       height: 100%;
-    }
-
-    & > li {
-      position: relative;
-    }
-
-    & > li:before {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      width: 30%;
-      border-radius: 12px;
-      background-color: #f1f1f1;
-      content: '';
-    }
-
-    & > li + li {
-      margin-top: 12px;
     }
 
     .inner_half {
@@ -61,70 +46,67 @@ const Styled: State = {
       content: '';
     }
 
-    .inner_half .title_attribute {
+    .inner_half .title {
       width: 60%;
     }
 
-    .inner_half .contents_attribute {
+    .inner_half .content {
       width: 40%;
-    }
-
-    .title_attribute,
-    .contents_attribute {
-      box-sizing: border-box;
-      font-size: 12px;
-    }
-
-    .title_attribute {
-      display: inline-block;
-      position: relative;
-      z-index: 1;
-      width: 30%;
-      padding: 12px;
-      box-sizing: border-box;
-      text-align: center;
-      vertical-align: middle;
-    }
-
-    .title_attribute .list_local {
-      padding: 12px 0;
-    }
-
-    .title_attribute .list_local li + li {
-      margin-top: 12px;
-    }
-
-    .contents_attribute {
-      display: inline-block;
-      width: 70%;
-      padding: 12px;
-      vertical-align: middle;
-      word-break: keep-all;
-    }
-
-    .contents_attribute .list_local {
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid #e9e9e9;
-      box-sizing: border-box;
     }
 
     .emphasis_price {
       font-style: normal;
     }
 
-    ${(props: Props) => {
-      return (
-        props.padding &&
-        css`
-          padding: 12px;
-        `
-      )
-    }}
-  `
+    /* ${(props: Props) => {
+      return props.styles && css``
+    }} */
+  `,
+  item: styled.li`
+    position: relative;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 30%;
+      border-radius: 12px;
+      background-color: #f1f1f1;
+      content: '';
+    }
+
+    & + & {
+      margin-top: 12px;
+    }
+  `,
+  title: styled.title`
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    width: 30%;
+    padding: 12px;
+    box-sizing: border-box;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+  `,
+  content: styled.div`
+    display: inline-block;
+    width: 70%;
+    padding: 12px;
+    box-sizing: border-box;
+    font-size: 12px;
+    vertical-align: middle;
+    word-break: keep-all;
+  `,
+  list2: styled.ul``,
+  item2: styled.li``
 }
 
-const reinforce = [
+const enchant = [
   { text: '+0', rate: 0, checked: true },
   { text: '+1', rate: 1, checked: false },
   { text: '+2', rate: 2, checked: false },
@@ -148,23 +130,21 @@ const reinforce = [
 ]
 
 const Item = React.memo(function Item({ attributes }: any) {
-  const { power, normal, handler } = attributes
+  const { onChange } = attributes
 
   return (
     <>
-      <li>
-        <strong className="title_attribute">
+      <Styled.item>
+        <Styled.title>
           <div className="outer_cell">
             <div className="inner_cell">일반</div>
           </div>
-        </strong>
+        </Styled.title>
 
-        <div className="contents_attribute">
-          <ul className="list_choice type_enchant">
-            <Choice attributes={{ type: 'enchant', label: 'enchant', data: reinforce, normal, event: handler['body'] }} />
-          </ul>
-        </div>
-      </li>
+        <Styled.content>
+          <Choice attributes={{ label: 'normal', name: 'enchant', data: enchant, defaultValue: false, onChange: onChange['body'] }} />
+        </Styled.content>
+      </Styled.item>
     </>
   )
 })
@@ -174,14 +154,14 @@ function Result({ attributes, style, children }: Attributes) {
     return Object.assign({}, defaultProps.attributes, attributes)
   }, [attributes])
 
-  const { power, normal, handler } = useMemo(() => {
+  const { onChange } = useMemo(() => {
     return assignment
   }, [assignment])
 
   return (
-    <Styled.enchant style={style}>
-      <Item attributes={{ power, normal, handler }} />
-    </Styled.enchant>
+    <Styled.list style={style}>
+      <Item attributes={{ onChange }} />
+    </Styled.list>
   )
 }
 

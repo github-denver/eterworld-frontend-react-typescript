@@ -18,7 +18,7 @@ function List({ location, match }: any) {
     ignoreQueryPrefix: true
   })
 
-  const grade = !!prefixed.grade ? prefixed.grade : 1
+  const grade = !!prefixed.grade ? Number(prefixed.grade) : 1
 
   return (
     <div className="wrapper">
@@ -52,8 +52,20 @@ function List({ location, match }: any) {
           style={{ padding: '12px' }}
         />
 
-        <Hgroup attributes={{ level: 3, title: '근거리 무기', invisible: false, padding: true }} style={{ padding: '12px 12px 0' }} />
-        <Choice location={location} attributes={{ label: 'grade', grade: grade, suffix: '등급', length: 4, checked: true }} style={{ padding: '12px' }} />
+        <Hgroup attributes={{ level: 3, title: '근거리 무기', invisible: false }} style={{ padding: '12px 12px 0' }} />
+        <Choice
+          location={location}
+          attributes={{
+            label: 'grade',
+            grade: grade,
+            suffix: '등급',
+            start: 1,
+            end: 12,
+            size: 4,
+            checked: true
+          }}
+          style={{ padding: '12px' }}
+        />
 
         <Rows location={location} attributes={{ service: service }} style={{ padding: '0 12px' }} />
 

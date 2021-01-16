@@ -1,50 +1,32 @@
-// import React from 'react'
 import React, { useMemo } from 'react'
 import styled, { css } from 'styled-components'
 
 import Choice from '@/components/common/Choice'
-
-// import { Attributes } from '@/interfaces/padding.interfaces'
 
 interface Attributes {
   [key: string]: any
 }
 
 interface State {
-  smelt: any
+  list: any
+  item: any
+  title: any
+  content: any
+  list2: any
+  item2: any
 }
 
 interface Props {
-  padding: boolean
+  styles: boolean
 }
 
 const Styled: State = {
-  smelt: styled.ul`
+  list: styled.ul`
     font-size: 0;
 
     .outer_cell {
       width: 100%;
       height: 100%;
-    }
-
-    & > li {
-      position: relative;
-    }
-
-    & > li:before {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      width: 30%;
-      border-radius: 12px;
-      background-color: #f1f1f1;
-      content: '';
-    }
-
-    & > li + li {
-      margin-top: 12px;
     }
 
     .inner_half {
@@ -64,75 +46,68 @@ const Styled: State = {
       content: '';
     }
 
-    .inner_half .title_attribute {
+    .inner_half .title {
       width: 60%;
     }
 
-    .inner_half .contents_attribute {
+    .inner_half .content {
       width: 40%;
-    }
-
-    .title_attribute,
-    .contents_attribute {
-      box-sizing: border-box;
-      font-size: 12px;
-    }
-
-    .title_attribute {
-      display: inline-block;
-      position: relative;
-      z-index: 1;
-      width: 30%;
-      padding: 12px;
-      box-sizing: border-box;
-      text-align: center;
-      vertical-align: middle;
-    }
-
-    .title_attribute .list_local {
-      padding: 12px 0;
-    }
-
-    .title_attribute .list_local li + li {
-      margin-top: 12px;
-    }
-
-    .contents_attribute {
-      display: inline-block;
-      width: 70%;
-      padding: 12px;
-      vertical-align: middle;
-      word-break: keep-all;
-    }
-
-    .contents_attribute .list_local {
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid #e9e9e9;
-      box-sizing: border-box;
     }
 
     .emphasis_price {
       font-style: normal;
     }
 
-    ${(props: Props) => {
-      return (
-        props.padding &&
-        css`
-          padding: 12px;
-        `
-      )
-    }}
-  `
+    /* ${(props: Props) => {
+      return props.styles && css``
+    }} */
+  `,
+  item: styled.li`
+    position: relative;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 30%;
+      border-radius: 12px;
+      background-color: #f1f1f1;
+      content: '';
+    }
+
+    & + & {
+      margin-top: 12px;
+    }
+  `,
+  title: styled.title`
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    width: 30%;
+    padding: 12px;
+    box-sizing: border-box;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+  `,
+  content: styled.div`
+    display: inline-block;
+    width: 70%;
+    padding: 12px;
+    box-sizing: border-box;
+    font-size: 12px;
+    vertical-align: middle;
+    word-break: keep-all;
+  `,
+  list2: styled.ul``,
+  item2: styled.li``
 }
 
-// const type = ['몸체', '총열', '조준경', '손잡이']
-
-// const smelt = ['기본', '초보', '숙련', '전문', '장인', '명인', 'O.T.']
-
 const Item = React.memo(function Item({ attributes }: Attributes) {
-  const { handler } = attributes
+  const { onChange } = attributes
 
   const upgrade = [
     { text: '기본', rate: 0, checked: true },
@@ -146,17 +121,53 @@ const Item = React.memo(function Item({ attributes }: Attributes) {
 
   return (
     <>
-      <li>
-        <strong className="title_attribute">
+      <Styled.item>
+        <Styled.title>
           <div className="outer_cell">
             <div className="inner_cell">몸체</div>
           </div>
-        </strong>
+        </Styled.title>
 
-        <div className="contents_attribute">
-          <Choice attributes={{ type: 'upgrade', label: 'body', data: upgrade, event: handler['body'] }} />
-        </div>
-      </li>
+        <Styled.content>
+          <Choice attributes={{ label: 'body', data: upgrade, onChange: onChange['body'] }} />
+        </Styled.content>
+      </Styled.item>
+
+      <Styled.item>
+        <Styled.title>
+          <div className="outer_cell">
+            <div className="inner_cell">총열</div>
+          </div>
+        </Styled.title>
+
+        <Styled.content>
+          <Choice attributes={{ label: 'barrel', data: upgrade, onChange: onChange['barrel'] }} />
+        </Styled.content>
+      </Styled.item>
+
+      <Styled.item>
+        <Styled.title>
+          <div className="outer_cell">
+            <div className="inner_cell">조준경</div>
+          </div>
+        </Styled.title>
+
+        <Styled.content>
+          <Choice attributes={{ label: 'sight', data: upgrade, onChange: onChange['sight'] }} />
+        </Styled.content>
+      </Styled.item>
+
+      <Styled.item>
+        <Styled.title>
+          <div className="outer_cell">
+            <div className="inner_cell">손잡이</div>
+          </div>
+        </Styled.title>
+
+        <Styled.content>
+          <Choice attributes={{ label: 'handle', data: upgrade, onChange: onChange['handle'] }} />
+        </Styled.content>
+      </Styled.item>
     </>
   )
 })
@@ -166,14 +177,14 @@ function Result({ attributes, style }: Attributes) {
     return Object.assign({}, defaultProps.attributes, attributes)
   }, [attributes])
 
-  const { handler } = useMemo(() => {
+  const { onChange } = useMemo(() => {
     return assignment
   }, [assignment])
 
   return (
-    <Styled.smelt style={style}>
-      <Item attributes={{ handler: handler }} />
-    </Styled.smelt>
+    <Styled.list style={style}>
+      <Item attributes={{ onChange: onChange }} />
+    </Styled.list>
   )
 }
 

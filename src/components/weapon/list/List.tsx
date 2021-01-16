@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
 import Frame from '@/components/common/frame/Frame'
-import Information from '@/components/common/information/Information'
+import Detail from '@/components/common/detail/Detail'
 
 // import { Attributes } from '@/interfaces/padding.interfaces'
 
@@ -93,7 +93,7 @@ function Result({ attributes, style }: Attributes) {
               <Styled.link to={`/eternalcity/${service}/${category}/read/${currentValue.number}?grade=${grade}`}>
                 <Frame attributes={{ thumbnail: currentValue.thumbnail, service: service, category: category, name: currentValue.name }} />
 
-                <Information
+                <Detail
                   attributes={{
                     name: currentValue.name,
                     power: currentValue.power,
