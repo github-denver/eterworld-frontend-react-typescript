@@ -18,6 +18,10 @@ const Frame = styled.span`
     height: 100%;
     margin: 0 auto;
   }
+
+  img {
+    max-width: 100%;
+  }
 `
 
 interface Attributes {

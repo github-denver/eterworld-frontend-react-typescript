@@ -106,27 +106,29 @@ const Styled: State = {
   item2: styled.li``
 }
 
-const enchant = [
-  { text: '+0', rate: 0, checked: true },
-  { text: '+1', rate: 1, checked: false },
-  { text: '+2', rate: 2, checked: false },
-  { text: '+3', rate: 3, checked: false },
-  { text: '+4', rate: 4, checked: false },
-  { text: '+5', rate: 5, checked: false },
-  { text: '+6', rate: 6, checked: false },
-  { text: '+7', rate: 7, checked: false },
-  { text: '+8', rate: 8, checked: false },
-  { text: '+9', rate: 9, checked: false },
-  { text: 'MAX +0', rate: 0, checked: false },
-  { text: 'MAX +1', rate: 1, checked: false },
-  { text: 'MAX +2', rate: 1, checked: false },
-  { text: 'MAX +3', rate: 3, checked: false },
-  { text: 'MAX +4', rate: 3, checked: false },
-  { text: 'MAX +5', rate: 3, checked: false },
-  { text: 'MAX +6', rate: 6, checked: false },
-  { text: 'MAX +7', rate: 6, checked: false },
-  { text: 'MAX +8', rate: 6, checked: false },
-  { text: 'MAX +9', rate: 10, checked: false }
+const normal = [
+  { sequence: 1, text: '+0', rate: 0, checked: true },
+  { sequence: 2, text: '+1', rate: 1, checked: false },
+  { sequence: 3, text: '+2', rate: 2, checked: false },
+  { sequence: 4, text: '+3', rate: 3, checked: false },
+  { sequence: 5, text: '+4', rate: 4, checked: false },
+  { sequence: 6, text: '+5', rate: 5, checked: false },
+  { sequence: 7, text: '+6', rate: 6, checked: false },
+  { sequence: 8, text: '+7', rate: 7, checked: false },
+  { sequence: 9, text: '+8', rate: 8, checked: false },
+  { sequence: 10, text: '+9', rate: 9, checked: false }
+]
+const max = [
+  { sequence: 11, text: 'MAX +0', rate: 0, checked: false },
+  { sequence: 12, text: 'MAX +1', rate: 1, checked: false },
+  { sequence: 13, text: 'MAX +2', rate: 1, checked: false },
+  { sequence: 14, text: 'MAX +3', rate: 3, checked: false },
+  { sequence: 15, text: 'MAX +4', rate: 3, checked: false },
+  { sequence: 16, text: 'MAX +5', rate: 3, checked: false },
+  { sequence: 17, text: 'MAX +6', rate: 6, checked: false },
+  { sequence: 18, text: 'MAX +7', rate: 6, checked: false },
+  { sequence: 19, text: 'MAX +8', rate: 6, checked: false },
+  { sequence: 20, text: 'MAX +9', rate: 10, checked: false }
 ]
 
 const Item = React.memo(function Item({ attributes }: any) {
@@ -142,7 +144,19 @@ const Item = React.memo(function Item({ attributes }: any) {
         </Styled.title>
 
         <Styled.content>
-          <Choice attributes={{ label: 'normal', name: 'enchant', data: enchant, defaultValue: false, onChange: onChange['body'] }} />
+          <Choice attributes={{ label: 'normal', name: 'enchant', data: normal, onChange: onChange['body'], sequence: true }} />
+        </Styled.content>
+      </Styled.item>
+
+      <Styled.item>
+        <Styled.title>
+          <div className="outer_cell">
+            <div className="inner_cell">MAX</div>
+          </div>
+        </Styled.title>
+
+        <Styled.content>
+          <Choice attributes={{ label: 'max', name: 'enchant', data: max, increment: 1, onChange: onChange['body'], sequence: true }} />
         </Styled.content>
       </Styled.item>
     </>

@@ -25,9 +25,21 @@ const Navigation = styled.nav`
   }
 
   .list_lnb {
+    position: relative;
     margin: 0 -1px -1px;
     font-size: 0;
     background-color: #f9f9f9;
+  }
+
+  .list_lnb:before {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    z-index: 1;
+    background-color: #e9e9e9;
+    content: '';
   }
 
   .list_lnb > li {
@@ -78,31 +90,6 @@ function Result() {
                 <li>
                   <Link to="/eternalcity/weapon/ranged/list" className="link_lnb">
                     원거리 무기
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/" className="link_lnb">
-                    남성용 방어구
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/" className="link_lnb">
-                    남성용 변이체 방어구
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/" className="link_lnb">
-                    여성용 방어구
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/" className="link_lnb">
-                    여성용 변이체 방어구
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/" className="link_lnb">
-                    액세서리
                   </Link>
                 </li>
               </ul>

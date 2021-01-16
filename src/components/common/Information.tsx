@@ -252,26 +252,26 @@ function Result({ location, attributes, style, children }: Attributes) {
 
   const changeReinforce = (power: any, target: any) => {
     const reinforce = [
-      { text: '+0', rate: 0, checked: true },
-      { text: '+1', rate: 1, checked: false },
-      { text: '+2', rate: 2, checked: false },
-      { text: '+3', rate: 3, checked: false },
-      { text: '+4', rate: 4, checked: false },
-      { text: '+5', rate: 5, checked: false },
-      { text: '+6', rate: 6, checked: false },
-      { text: '+7', rate: 7, checked: false },
-      { text: '+8', rate: 8, checked: false },
-      { text: '+9', rate: 9, checked: false },
-      { text: 'MAX +0', rate: 1, checked: true },
-      { text: 'MAX +1', rate: 1, checked: false },
-      { text: 'MAX +2', rate: 1, checked: false },
-      { text: 'MAX +3', rate: 3, checked: false },
-      { text: 'MAX +4', rate: 3, checked: false },
-      { text: 'MAX +5', rate: 3, checked: false },
-      { text: 'MAX +6', rate: 6, checked: false },
-      { text: 'MAX +7', rate: 6, checked: false },
-      { text: 'MAX +8', rate: 6, checked: false },
-      { text: 'MAX +9', rate: 10, checked: false }
+      { sequence: 1, text: '+0', rate: 0, checked: true },
+      { sequence: 2, text: '+1', rate: 1, checked: false },
+      { sequence: 3, text: '+2', rate: 2, checked: false },
+      { sequence: 4, text: '+3', rate: 3, checked: false },
+      { sequence: 5, text: '+4', rate: 4, checked: false },
+      { sequence: 6, text: '+5', rate: 5, checked: false },
+      { sequence: 7, text: '+6', rate: 6, checked: false },
+      { sequence: 8, text: '+7', rate: 7, checked: false },
+      { sequence: 9, text: '+8', rate: 8, checked: false },
+      { sequence: 10, text: '+9', rate: 9, checked: false },
+      { sequence: 11, text: 'MAX +0', rate: 1, checked: true },
+      { sequence: 12, text: 'MAX +1', rate: 1, checked: false },
+      { sequence: 13, text: 'MAX +2', rate: 1, checked: false },
+      { sequence: 14, text: 'MAX +3', rate: 3, checked: false },
+      { sequence: 15, text: 'MAX +4', rate: 3, checked: false },
+      { sequence: 16, text: 'MAX +5', rate: 3, checked: false },
+      { sequence: 17, text: 'MAX +6', rate: 6, checked: false },
+      { sequence: 18, text: 'MAX +7', rate: 6, checked: false },
+      { sequence: 19, text: 'MAX +8', rate: 6, checked: false },
+      { sequence: 20, text: 'MAX +9', rate: 10, checked: false }
     ]
 
     let reinforceNormal: any = []
@@ -331,30 +331,30 @@ function Result({ location, attributes, style, children }: Attributes) {
   const changeEnchant = (event: any) => {
     let calc: any = 0
     if (isUpgrade === false) {
-      calc = changeReinforce(basePower, event.target.value)
+      calc = changeReinforce(basePower, event.target.value - 1)
     } else {
       let calc2 = calculation(basePower, test)
 
-      calc = changeReinforce(calc2, event.target.value)
+      calc = changeReinforce(calc2, event.target.value - 1)
     }
 
     setReinforceIndex(() => {
-      return event.target.value
+      return event.target.value - 1
     })
 
     // 강화를 했다.
     setIsEnchant(() => {
-      return event.target.value > 0 ? true : false
+      return event.target.value - 1 > 0 ? true : false
     })
 
     // 강화를 했다. 강화 데미지 적용
     setEnchantPower(() => {
-      return calc[event.target.value]
+      return calc[event.target.value - 1]
     })
 
     // 최종 대미지를 노출.
     setShowPower(() => {
-      return calc[event.target.value]
+      return calc[event.target.value - 1]
     })
   }
   const changeBarrel = (event: any) => {}

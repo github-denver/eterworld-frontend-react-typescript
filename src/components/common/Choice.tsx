@@ -72,7 +72,7 @@ const Styled: State = {
 }
 
 const Manual = React.memo(function Tax({ attributes }: any) {
-  const { currentValue, index, label, name, defaultValue, onChange } = attributes
+  const { currentValue, index, label, name, onChange, sequence } = attributes
 
   return (
     <Styled.item>
@@ -81,7 +81,7 @@ const Manual = React.memo(function Tax({ attributes }: any) {
           type="radio"
           name={!!name ? name : label}
           id={`${label}${index}`}
-          defaultValue={!!defaultValue ? currentValue.rate : index}
+          defaultValue={!!sequence ? currentValue.sequence : currentValue.rate}
           defaultChecked={currentValue.checked}
           onChange={onChange}
         />
@@ -92,7 +92,7 @@ const Manual = React.memo(function Tax({ attributes }: any) {
 })
 
 const Auto = React.memo(function Auto({ attributes }: any) {
-  const { label, name, prefix, grade, suffix, size, defaultValue, checked, onChange, index } = attributes
+  const { label, name, prefix, grade, suffix, size, checked, onChange, index } = attributes
 
   return (
     <Styled.item size={size}>
@@ -101,7 +101,7 @@ const Auto = React.memo(function Auto({ attributes }: any) {
           type="radio"
           name={!!name ? name : label}
           id={`${label}${index}`}
-          defaultValue={!!defaultValue && index}
+          defaultValue={index}
           defaultChecked={!!checked && grade === index}
           onChange={onChange}
         />
@@ -116,13 +116,13 @@ const Auto = React.memo(function Auto({ attributes }: any) {
 })
 
 const Item = React.memo(function Item({ attributes }: Attributes) {
-  const { data, label, name, prefix, grade, suffix, start, end, size, defaultValue, checked, onChange } = attributes
+  const { data, label, name, prefix, grade, suffix, start, end, size, checked, onChange, sequence } = attributes
 
   const result: any = []
 
   if (!!data) {
     return data.map((currentValue: string, index: number) => {
-      return <Manual attributes={{ currentValue, index, label, name, defaultValue, onChange: onChange }} key={index} />
+      return <Manual attributes={{ currentValue, index, label, name, onChange, sequence }} key={index} />
     })
   } else {
     for (let i = start; i <= end; i++) {
@@ -136,7 +136,6 @@ const Item = React.memo(function Item({ attributes }: Attributes) {
               grade,
               suffix,
               size,
-              defaultValue,
               checked,
               onChange,
               index
@@ -156,7 +155,7 @@ function Result({ attributes, style }: Attributes) {
     return Object.assign({}, defaultProps.attributes, attributes)
   }, [attributes])
 
-  const { data, label, name, prefix, grade, suffix, start, end, size, defaultValue, checked, onChange } = useMemo(() => {
+  const { data, label, name, prefix, grade, suffix, start, end, size, checked, onChange, sequence } = useMemo(() => {
     return assignment
   }, [assignment])
 
@@ -173,9 +172,9 @@ function Result({ attributes, style }: Attributes) {
           start,
           end,
           size,
-          defaultValue,
           checked,
-          onChange
+          onChange,
+          sequence
         }}
       />
     </Styled.list>
@@ -184,7 +183,7 @@ function Result({ attributes, style }: Attributes) {
 
 const defaultProps = {
   attributes: {
-    defaultValue: true
+    sequence: false
   }
 }
 
