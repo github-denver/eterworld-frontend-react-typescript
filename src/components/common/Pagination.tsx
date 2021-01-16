@@ -21,6 +21,7 @@ const Styled: State = {
 
     .link_pagination {
       display: block;
+      position: relative;
       min-width: 32px;
       padding: 8px 4px;
       border-radius: 6px;
@@ -29,12 +30,32 @@ const Styled: State = {
       line-height: 1;
     }
 
+    .link_pagination:before {
+      display: none;
+      position: absolute;
+      right: 4px;
+      bottom: 0;
+      left: 4px;
+      z-index: -1;
+      height: 4px;
+      background-color: #d9b9a7;
+      content: '';
+    }
+
     .link_pagination.current {
       font-weight: bold;
-      color: #000;
-      border: 1px solid #e9e9e9;
-      background-color: #f1f1f1;
     }
+
+    .link_pagination.current:before {
+      display: block;
+    }
+
+    /* .link_pagination.current {
+      font-weight: bold;
+      color: #fff;
+      border: 1px solid #4f5952;
+      background-color: #4f5952;
+    } */
   `
 }
 

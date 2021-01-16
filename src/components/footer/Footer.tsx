@@ -6,7 +6,10 @@ interface State {
 }
 
 const Styled: State = {
-  footer: styled.footer``
+  footer: styled.footer`
+    height: 100px;
+    background-color: #0d0d0d;
+  `
 }
 
 function Footer() {

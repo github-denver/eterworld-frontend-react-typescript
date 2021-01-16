@@ -13,7 +13,7 @@ const Header = styled.header`
   left: 0;
   z-index: 10;
   padding: 12px;
-  background-color: #fff;
+  background-color: #5f7368;
 
   .inner_half {
     vertical-align: middle;
@@ -33,6 +33,7 @@ const Header = styled.header`
     display: block;
     font-size: 18px;
     font-weight: bold;
+    color: #fff;
   }
 
   .button_hamburger {
@@ -100,7 +101,7 @@ function Result() {
 
             <Hgroup attributes={{ title: '로그인 정보' }} />
 
-            <ul className="list_utility">
+            {/* <ul className="list_utility">
               <li>
                 <Link to="/" className="link_utility">
                   <span className="icon_global icon_login">로그인</span>
@@ -111,7 +112,7 @@ function Result() {
                   <span className="icon_global icon_register">회원가입</span>
                 </Link>
               </li>
-            </ul>
+            </ul> */}
 
             {menuVisible && <Menu attributes={{ visible: onMenuVisible }} />}
 

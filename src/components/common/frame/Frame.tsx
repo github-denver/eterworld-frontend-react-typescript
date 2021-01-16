@@ -11,6 +11,7 @@ const Frame = styled.span`
   font-size: 1px;
   color: transparent;
   background-color: #5f79aa;
+  /* background-color: #708c8c; */
   background-repeat: no-repeat;
   background-size: cover;
 

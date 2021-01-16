@@ -5,7 +5,7 @@ import Hgroup from '@/components/common/Hgroup'
 
 const Navigation = styled.nav`
   overflow: hidden;
-  background-color: #f1f1f1;
+  background-color: #f2f2f2;
 
   .inner_gnb {
     margin-top: 10px;

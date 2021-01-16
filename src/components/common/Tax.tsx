@@ -43,7 +43,7 @@ const Styled: State = {
       left: 0;
       width: 60%;
       border-radius: 12px;
-      background-color: #f1f1f1;
+      background-color: #f2f2f2;
       content: '';
     }
 
@@ -74,7 +74,7 @@ const Styled: State = {
       left: 0;
       width: 30%;
       border-radius: 12px;
-      background-color: #f1f1f1;
+      background-color: #f2f2f2;
       content: '';
     }
 

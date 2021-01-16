@@ -54,7 +54,7 @@ const Styled: State = {
       font-weight: bold;
       font-size: 12px;
       line-height: 1.4;
-      background-color: #fff;
+      background-color: #f2f2f2;
       text-align: center;
       cursor: pointer;
       webkit-user-select: none;
@@ -64,7 +64,9 @@ const Styled: State = {
     }
 
     input:checked + label {
-      background-color: #f1f1f1;
+      border-color: #48592e;
+      color: #f2f2f2;
+      background-color: #48592e;
       outline: 1px dotted #000;
       outline: -webkit-focus-ring-color auto 5px;
     }

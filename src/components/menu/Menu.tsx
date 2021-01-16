@@ -13,6 +13,7 @@ interface State {
 const Styled: State = {
   menu: styled.div`
     text-align: left;
+    background-color: #f2f2f2;
 
     &,
     .inner_menu {

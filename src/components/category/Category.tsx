@@ -22,7 +22,6 @@ interface Props {
 const Styled: State = {
   category: styled.div`
     padding: 12px 0;
-    background-color: #fff;
   `,
   list: styled.ul`
     overflow: auto;
@@ -37,24 +36,37 @@ const Styled: State = {
     vertical-align: top;
 
     & + & {
-      padding-left: 12px;
+      margin-left: 24px;
     }
   `,
   link: styled(Link)`
     display: block;
-    border-radius: 12px;
-    padding: 6px 12px;
+    position: relative;
+    padding: 6px 0;
     font-size: 14px;
     font-weight: bold;
     color: gray;
-    background-color: #f1f1f1;
+
+    &:before {
+      display: none;
+      position: absolute;
+      right: 0;
+      bottom: 6px;
+      left: 0;
+      z-index: -1;
+      height: 6px;
+      background-color: #d9b9a7;
+      content: '';
+    }
 
     ${(props: Props) => {
       return (
         props.current &&
         css`
-          color: #fff;
-          background-color: #000;
+          color: #000;
+          &:before {
+            display: block;
+          }
         `
       )
     }}

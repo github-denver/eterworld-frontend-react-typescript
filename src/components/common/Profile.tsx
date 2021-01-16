@@ -32,17 +32,23 @@ const Profile = styled.div`
   .group_picture + .txt_profile {
     margin-left: 10px;
   }
+
+  span {
+    display: block;
+    height: 36px;
+  }
 `
 
 function Result() {
   return (
     <>
       <Profile className="group_profile">
-        <a href="/member/login" className="link_profile">
+        <span></span>
+        {/* <a href="/member/login" className="link_profile">
           <Picture />
 
           <span className="txt_profile">로그인해 주세요.</span>
-        </a>
+        </a> */}
       </Profile>
     </>
   )

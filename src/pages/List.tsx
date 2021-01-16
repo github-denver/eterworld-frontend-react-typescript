@@ -64,10 +64,10 @@ function List({ location, match }: any) {
             size: 4,
             checked: true
           }}
-          style={{ padding: '12px' }}
+          style={{ padding: '12px 12px 0' }}
         />
 
-        <Rows location={location} attributes={{ service: service }} style={{ padding: '0 12px' }} />
+        <Rows location={location} attributes={{ service: service }} style={{ padding: '12px 12px 0' }} />
 
         <Pagination />
       </section>
