@@ -2,7 +2,7 @@ import React from 'react'
 
 import Header from '@/containers/header/Header'
 import Hgroup from '@/components/common/Hgroup'
-// import Category from '@/components/category/Category'
+import Category from '@/components/category/Category'
 import Swiper from '@/components/slide/Swiper'
 // import Horizontal from '@/components/common/Horizontal'
 import Rows from '@/containers/weapon/list/List'
@@ -17,7 +17,7 @@ function Index({ history, location, match }: any) {
       <section className="container">
         <Hgroup attributes={{ title: '본문' }} />
 
-        {/* <Category
+        <Category
           location={location}
           attributes={{
             data: [
@@ -40,17 +40,17 @@ function Index({ history, location, match }: any) {
             ]
           }}
           style={{ padding: '12px' }}
-        /> */}
+        />
 
         <Hgroup attributes={{ level: 3, title: '인기 있는 무기', invisible: false }} style={{ padding: '12px 12px 0' }} />
         <Swiper attributes={{ padding: true }} />
 
         <Hgroup attributes={{ level: 3, title: '근거리 무기', invisible: false }} style={{ padding: '12px 12px 0' }} />
-        <Rows location={location} attributes={{ service: 'weapon', category: 'melee' }} style={{ padding: '12px 12px 0' }} />
+        <Rows location={location} attributes={{ service: 'weapon', category: 'melee', grade: 12 }} style={{ padding: '12px 12px 0' }} />
         {/* <Horizontal attributes={{ padding: true }} /> */}
 
         <Hgroup attributes={{ level: 3, title: '원거리 무기', invisible: false }} style={{ padding: '12px 12px 0' }} />
-        <Rows location={location} attributes={{ service: 'weapon', category: 'ranged' }} style={{ padding: '12px 12px 0' }} />
+        <Rows location={location} attributes={{ service: 'weapon', category: 'ranged', grade: 12 }} style={{ padding: '12px 12px 0' }} />
       </section>
 
       {/* <Quick /> */}
