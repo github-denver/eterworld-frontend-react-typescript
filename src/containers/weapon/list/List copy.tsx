@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 
 import qs from 'qs'
 
-import Horizontal from '@/components/common/Horizontal'
+import Rows from '@/components/weapon/list/List'
 
 import { weaponList, weaponListInitial } from '@/modules/weapon/list'
 
 const Result = (props: any) => {
-  const { attributes } = props
-  const { history, location, match } = props
+  const { attributes, style } = props
+  const { location } = props
 
   const { loading, error, list, pagination } = useSelector(({ weaponList, loading }: any) => {
     const temp = {
@@ -33,52 +33,47 @@ const Result = (props: any) => {
 
   const dispatch = useDispatch()
 
-  const prefixed = qs.parse(attributes.location.search, {
+  const prefixed = qs.parse(location.search, {
     ignoreQueryPrefix: true
   })
 
-  let pathname = location.pathname.split('/').filter((element: string) => {
+  const pathname = location.pathname.split('/').filter((element: string) => {
     return element !== null && element !== undefined && element !== ''
   })
 
-  let service = pathname[1]
-
-  let category = pathname[2]
+  const category = pathname[2]
 
   let number = pathname.splice(-1)[0]
 
-  let grade: any = prefixed.grade
+  const grade = !!prefixed.grade ? Number(prefixed.grade) : 1
+  // console.log('containers → common → weapon → list → List.tsx → grade: ', grade)
 
   if (number === 'list' || number === 'read' || category === 'read') {
     number = 1
   }
 
-  if (!grade) {
-    grade = 1
-  }
-
   useEffect(() => {
-    dispatch(weaponList({ category: category, number, grade: grade, select: '', keyword: '' }))
+    dispatch(weaponList({ service: attributes.service, category: attributes.category, number, grade, select: '', keyword: '' }))
 
     return () => {
-      console.log('containers → common → Horizontal.tsx → 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
+      console.log('containers → common → weapon → list → List.tsx → 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
 
       dispatch(weaponListInitial())
     }
-  }, [dispatch, category, number, prefixed.grade])
+  }, [dispatch, attributes.service, attributes.category, number, grade])
 
   return (
-    <Horizontal
+    <Rows
       attributes={{
         loading: loading,
         error: error,
-        service: service,
-        category: category,
+        service: attributes.service,
+        category: attributes.category,
         list: list,
         pagination: pagination,
-        grade: prefixed.grade,
-        padding: attributes.padding
+        grade: grade
       }}
+      style={style}
     />
   )
 }

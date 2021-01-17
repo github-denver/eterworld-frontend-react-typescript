@@ -13,7 +13,7 @@ const Header = styled.header`
   left: 0;
   z-index: 10;
   padding: 12px;
-  background-color: #5f7368;
+  background-color: #fff;
 
   .inner_half {
     vertical-align: middle;
@@ -33,7 +33,7 @@ const Header = styled.header`
     display: block;
     font-size: 18px;
     font-weight: bold;
-    color: #fff;
+    line-height: 32px;
   }
 
   .button_hamburger {

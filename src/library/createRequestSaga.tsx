@@ -23,6 +23,7 @@ export default function createRequestSaga(type: any, request: any) {
 
     try {
       const response = yield call(request, action.payload)
+      // console.log('library → [createRequestSaga.js] → createRequestSaga → function* → response: ', response)
 
       yield put({
         type: SUCCESS,

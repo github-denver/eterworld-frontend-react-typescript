@@ -36,18 +36,22 @@ const Styled: State = {
     vertical-align: top;
 
     & + & {
-      margin-left: 24px;
+      margin-left: 12px;
+      /* margin-left: 24px; */
     }
   `,
   link: styled(Link)`
     display: block;
     position: relative;
-    padding: 6px 0;
+    padding: 6px 12px;
+    /* padding: 6px 0; */
+    border-radius: 12px;
     font-size: 14px;
     font-weight: bold;
     color: gray;
+    background-color: #f1f1f1;
 
-    &:before {
+    /* &:before {
       display: none;
       position: absolute;
       right: 0;
@@ -55,18 +59,22 @@ const Styled: State = {
       left: 0;
       z-index: -1;
       height: 6px;
-      background-color: #d9b9a7;
+      background-color: #ffcd00;
       content: '';
-    }
+    } */
 
     ${(props: Props) => {
       return (
         props.current &&
         css`
-          color: #000;
+          color: #fff;
+          background-color: #000;
+
+          /* color: #000;
+
           &:before {
             display: block;
-          }
+          } */
         `
       )
     }}

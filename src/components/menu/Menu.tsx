@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Profile from '@/components/common/Profile'
+// import Profile from '@/components/common/Profile'
 import Navigation from '@/components/menu/Navigation'
 
 import { Attributes } from '@/interfaces/visible.interfaces'
@@ -13,7 +13,7 @@ interface State {
 const Styled: State = {
   menu: styled.div`
     text-align: left;
-    background-color: #f2f2f2;
+    background-color: #f1f1f1;
 
     &,
     .inner_menu {
@@ -62,7 +62,7 @@ function Result({ attributes }: Attributes) {
   return (
     <Styled.menu className="menu">
       <div className="inner_menu">
-        <Profile />
+        {/* <Profile /> */}
 
         <Navigation />
 

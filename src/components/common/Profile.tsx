@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Picture from '@/components/common/Picture'
+// import Picture from '@/components/common/Picture'
 
 const Profile = styled.div`
   display: table;

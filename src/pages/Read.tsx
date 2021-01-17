@@ -8,7 +8,25 @@ import Category from '@/components/category/Category'
 import Read from '@/containers/weapon/read/Read'
 import Footer from '@/components/footer/Footer'
 
-function Result({ location, match }: any) {
+import navigation from '@/utility/navigation'
+
+const func = (child: any, navigation: any) => {
+  let result = []
+
+  loop: for (let i in navigation) {
+    for (let j in navigation[i].children) {
+      if (navigation[i].children[j].category === child) {
+        result = navigation[i].children[j].text
+
+        break loop
+      }
+    }
+  }
+
+  return result
+}
+
+function Result({ location }: any) {
   const pathname = location.pathname.split('/').filter((element: string) => {
     return element !== null && element !== undefined && element !== ''
   })
@@ -20,6 +38,8 @@ function Result({ location, match }: any) {
   const service = pathname[1]
 
   const category = pathname[2]
+
+  const heading = func(category, navigation)
 
   const grade = !!prefixed.grade ? Number(prefixed.grade) : 1
 
@@ -62,8 +82,8 @@ function Result({ location, match }: any) {
             style={{ padding: '12px' }}
           />
 
-          <Hgroup attributes={{ level: 3, title: '근거리 무기', invisible: false }} style={{ padding: '12px 12px 0' }} />
-          <Read location={location} attributes={{ service: service, category: category, grade: grade, number: number }} style={{ padding: '12px 12px 0' }} />
+          <Hgroup attributes={{ level: 3, title: heading, invisible: false }} style={{ padding: '12px 12px 0' }} />
+          <Read location={location} attributes={{ service, category, grade, number }} style={{ padding: '12px 12px 0' }} />
         </section>
 
         <Footer />

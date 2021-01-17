@@ -5,11 +5,11 @@ import Hgroup from '@/components/common/Hgroup'
 
 const Navigation = styled.nav`
   overflow: hidden;
-  background-color: #f2f2f2;
+  background-color: #f1f1f1;
 
   .inner_gnb {
-    margin-top: 10px;
-    border-top: 1px solid #e9e9e9;
+    /* margin-top: 10px; */
+    /* border-top: 1px solid #e9e9e9; */
     border-bottom: 1px solid #e9e9e9;
   }
 
@@ -21,7 +21,8 @@ const Navigation = styled.nav`
     display: block;
     padding: 12px;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: bold;
+    line-height: 32px;
   }
 
   .list_lnb {

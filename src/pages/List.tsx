@@ -7,18 +7,49 @@ import Hgroup from '@/components/common/Hgroup'
 import Category from '@/components/category/Category'
 import Choice from '@/containers/common/Choice'
 import Rows from '@/containers/weapon/list/List'
-import Pagination from '@/components/common/Pagination'
 // import Quick from '@/components/common/Quick'
 import Footer from '@/components/footer/Footer'
 
-function List({ location, match }: any) {
-  const service = match.params.service
+import navigation from '@/utility/navigation'
+
+const func = (child: any, navigation: any) => {
+  let result = []
+
+  loop: for (let i in navigation) {
+    for (let j in navigation[i].children) {
+      if (navigation[i].children[j].category === child) {
+        result = navigation[i].children[j].text
+
+        break loop
+      }
+    }
+  }
+
+  return result
+}
+
+function List({ location }: any) {
+  const pathname = location.pathname.split('/').filter((element: string) => {
+    return element !== null && element !== undefined && element !== ''
+  })
 
   const prefixed = qs.parse(location.search, {
     ignoreQueryPrefix: true
   })
 
+  const service = pathname[1]
+
+  const category = pathname[2]
+
+  const heading = func(category, navigation)
+
   const grade = !!prefixed.grade ? Number(prefixed.grade) : 1
+
+  let number = pathname.splice(-1)[0]
+
+  if (number === 'list' || number === 'read' || category === 'read') {
+    number = 1
+  }
 
   return (
     <div className="wrapper">
@@ -52,7 +83,7 @@ function List({ location, match }: any) {
           style={{ padding: '12px' }}
         />
 
-        <Hgroup attributes={{ level: 3, title: '근거리 무기', invisible: false }} style={{ padding: '12px 12px 0' }} />
+        <Hgroup attributes={{ level: 3, title: heading, invisible: false }} style={{ padding: '12px 12px 0' }} />
         <Choice
           location={location}
           attributes={{
@@ -67,9 +98,7 @@ function List({ location, match }: any) {
           style={{ padding: '12px 12px 0' }}
         />
 
-        <Rows location={location} attributes={{ service: service }} style={{ padding: '12px 12px 0' }} />
-
-        <Pagination />
+        <Rows location={location} attributes={{ service, category, number, grade }} style={{ padding: '12px 12px 0' }} />
       </section>
 
       {/* <Quick /> */}

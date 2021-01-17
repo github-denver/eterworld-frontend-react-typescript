@@ -19,13 +19,13 @@ interface Props {
 
 const Styled: State = {
   list: styled.ul`
-    margin: -10px 0 0 -10px;
+    margin: -12px 0 0 -12px;
     font-size: 0;
   `,
   item: styled.li`
     display: inline-block;
     width: ${(props: Props) => (props.size ? 100 / props.size + '%' : '33.33%')};
-    padding: 10px 0 0 10px;
+    padding: 12px 0 0 12px;
     box-sizing: border-box;
     vertical-align: top;
 
@@ -54,7 +54,7 @@ const Styled: State = {
       font-weight: bold;
       font-size: 12px;
       line-height: 1.4;
-      background-color: #f2f2f2;
+      background-color: #fff;
       text-align: center;
       cursor: pointer;
       webkit-user-select: none;
@@ -64,11 +64,9 @@ const Styled: State = {
     }
 
     input:checked + label {
-      border-color: #48592e;
-      color: #f2f2f2;
-      background-color: #48592e;
-      outline: 1px dotted #000;
-      outline: -webkit-focus-ring-color auto 5px;
+      border-color: #000;
+      color: #fff;
+      background-color: #000;
     }
   `
 }

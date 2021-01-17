@@ -43,7 +43,7 @@ const Styled: State = {
       left: 0;
       width: 60%;
       border-radius: 12px;
-      background-color: #f2f2f2;
+      background-color: #f1f1f1;
       content: '';
     }
 
@@ -74,7 +74,7 @@ const Styled: State = {
       left: 0;
       width: 30%;
       border-radius: 12px;
-      background-color: #f2f2f2;
+      background-color: #f1f1f1;
       content: '';
     }
 
@@ -114,8 +114,8 @@ const Styled: State = {
     word-break: keep-all;
   `,
   list2: styled.ul`
-    margin-top: 12px;
-    padding-top: 12px;
+    margin-top: 6px;
+    padding-top: 6px;
     border-top: 1px solid #e9e9e9;
     box-sizing: border-box;
   `,

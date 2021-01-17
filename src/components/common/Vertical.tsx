@@ -21,7 +21,7 @@ const Vertical = styled.section`
     border-radius: 12px;
     font-size: 1px;
     color: transparent;
-    background-color: #f2f2f2;
+    background-color: #f1f1f1;
     background-position: 0 0;
     background-repeat: no-repeat;
     background-size: cover;

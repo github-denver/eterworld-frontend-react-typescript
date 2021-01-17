@@ -3,8 +3,8 @@ import createRequestSaga, { createRequestActionTypes } from '@/library/createReq
 import { takeLatest } from 'redux-saga/effects'
 import * as api from '@/library/api/list'
 
-const [WEAPON_READ, WEAPON_READ_SUCCESS, WEAPON_READ_FAILURE] = createRequestActionTypes('board/WEAPON_READ')
-const WEAPON_READ_INITIAL = 'board/WEAPON_READ_INITIAL'
+const [WEAPON_READ, WEAPON_READ_SUCCESS, WEAPON_READ_FAILURE] = createRequestActionTypes('weapon/WEAPON_READ')
+const WEAPON_READ_INITIAL = 'weapon/WEAPON_READ_INITIAL'
 
 export const weaponRead = createAction(WEAPON_READ, ({ service, category, number, grade, select, keyword }: any) => ({
   service,

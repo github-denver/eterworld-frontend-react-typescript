@@ -44,7 +44,7 @@ const Styled: State = {
       left: 0;
       width: 60%;
       border-radius: 12px;
-      background-color: #f2f2f2;
+      background-color: #f1f1f1;
       content: '';
     }
 
@@ -71,7 +71,7 @@ const Styled: State = {
       left: 0;
       width: 30%;
       border-radius: 12px;
-      background-color: #f2f2f2;
+      background-color: #f1f1f1;
       content: '';
     }
 
@@ -236,17 +236,17 @@ function Result({ location, attributes, style, children }: Attributes) {
     return assignment
   }, [assignment])
 
-  const [basePower, setBasePower] = useState(data.power)
+  // const [basePower, setBasePower] = useState(data.power)
 
   const [upgradePower, setUpgradPower] = useState(0)
-  const [enchantPower, setEnchantPower] = useState(0)
+  // const [enchantPower, setEnchantPower] = useState(0)
 
   const [showPower, setShowPower] = useState(upgradePower)
 
   const [isUpgrade, setIsUpgrade] = useState(false)
   const [isEnchant, setIsEnchant] = useState(false)
 
-  const [reinforceMap, setReinforceMap] = useState([])
+  // const [reinforceMap, setReinforceMap] = useState([])
   const [reinforceIndex, setReinforceIndex] = useState(0)
   const [test, setTestIndex] = useState(0)
 
@@ -283,9 +283,9 @@ function Result({ location, attributes, style, children }: Attributes) {
 
     reinforceNormal.splice(0, 1)
 
-    setReinforceMap(() => {
-      return reinforceNormal
-    })
+    // setReinforceMap(() => {
+    //   return reinforceNormal
+    // })
 
     return reinforceNormal
   }
@@ -299,9 +299,11 @@ function Result({ location, attributes, style, children }: Attributes) {
   const changeBody = (event: any) => {
     let calc = 0
     if (isEnchant === false) {
-      calc = calculation(basePower, event.target.value)
+      // calc = calculation(basePower, event.target.value)
+      calc = calculation(data.power, event.target.value)
     } else {
-      calc = calculation(basePower, event.target.value)
+      // calc = calculation(basePower, event.target.value)
+      calc = calculation(data.power, event.target.value)
 
       let calc2 = changeReinforce(calc, reinforceIndex)
 
@@ -331,9 +333,11 @@ function Result({ location, attributes, style, children }: Attributes) {
   const changeEnchant = (event: any) => {
     let calc: any = 0
     if (isUpgrade === false) {
-      calc = changeReinforce(basePower, event.target.value - 1)
+      // calc = changeReinforce(basePower, event.target.value - 1)
+      calc = changeReinforce(data.power, event.target.value - 1)
     } else {
-      let calc2 = calculation(basePower, test)
+      // let calc2 = calculation(basePower, test)
+      let calc2 = calculation(data.power, test)
 
       calc = changeReinforce(calc2, event.target.value - 1)
     }
@@ -348,9 +352,9 @@ function Result({ location, attributes, style, children }: Attributes) {
     })
 
     // 강화를 했다. 강화 데미지 적용
-    setEnchantPower(() => {
-      return calc[event.target.value - 1]
-    })
+    // setEnchantPower(() => {
+    //   return calc[event.target.value - 1]
+    // })
 
     // 최종 대미지를 노출.
     setShowPower(() => {
@@ -369,7 +373,8 @@ function Result({ location, attributes, style, children }: Attributes) {
             price: data.price,
             type: data.type,
             grade: data.grade,
-            power: showPower !== 0 ? showPower : basePower,
+            // power: showPower !== 0 ? showPower : basePower,
+            power: showPower !== 0 ? showPower : data.power,
             critical: data.critical,
             hit: data.hit,
             shoot: data.shoot,

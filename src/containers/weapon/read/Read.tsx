@@ -4,7 +4,7 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 
 import Read from '@/components/weapon/read/Read'
 
-import { weaponRead, weaponReadInitial } from '@/modules/board/read'
+import { weaponRead, weaponReadInitial } from '@/modules/weapon/read'
 
 const Result = (props: any) => {
   const { attributes, style } = props
@@ -33,6 +33,8 @@ const Result = (props: any) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    console.log('containers → weapon → read → Read.tsx → useEffect(() => { .. }')
+
     dispatch(weaponRead({ service, category, number, grade, select: '', keyword: '' }))
 
     return () => {

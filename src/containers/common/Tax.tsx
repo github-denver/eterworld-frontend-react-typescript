@@ -6,7 +6,7 @@ import qs from 'qs'
 
 import Tax from '@/components/common/Tax'
 
-import { weaponRead, weaponReadInitial } from '@/modules/board/read'
+import { weaponRead, weaponReadInitial } from '@/modules/weapon/read'
 
 const Result = (props: any) => {
   const { style } = props

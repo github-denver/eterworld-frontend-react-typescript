@@ -47,6 +47,7 @@ function Result({ location, attributes, style }: Attributes) {
     return Object.assign({}, defaultProps.attributes, attributes)
   }, [attributes])
 
+  // const { loading, error, service, category, read, grade } = useMemo(() => {
   const { loading, error, service, category, read } = useMemo(() => {
     return assignment
   }, [assignment])

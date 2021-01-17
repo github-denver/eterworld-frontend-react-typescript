@@ -20,9 +20,9 @@ const Frame = styled.span`
     margin: 0 auto;
   }
 
-  img {
+  /* img {
     max-width: 100%;
-  }
+  } */
 `
 
 interface Attributes {

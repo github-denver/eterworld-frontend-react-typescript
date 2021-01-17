@@ -1,19 +1,19 @@
 import { combineReducers } from 'redux'
 import { all } from 'redux-saga/effects'
 
-import boardList, { boardListSaga } from './board/list'
-import weaponRead, { weaponReadSaga } from './board/read'
+import weaponList, { weaponListSaga } from './weapon/list'
+import weaponRead, { weaponReadSaga } from './weapon/read'
 
 import loading from './loading'
 
 const rootReducer = combineReducers({
   loading,
-  boardList,
+  weaponList,
   weaponRead
 })
 
 export function* rootSaga() {
-  yield all([boardListSaga(), weaponReadSaga()])
+  yield all([weaponListSaga(), weaponReadSaga()])
 }
 
 export default rootReducer
