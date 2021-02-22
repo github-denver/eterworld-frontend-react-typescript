@@ -6,27 +6,27 @@ import qs from 'qs'
 
 import Horizontal from '@/components/common/Horizontal'
 
-import { weaponList, weaponListInitial } from '@/modules/weapon/list'
+import { listWeapon, listWeaponInitial } from '@/modules/list/weapon/common/list'
 
 const Result = (props: any) => {
   const { attributes } = props
   const { history, location, match } = props
 
-  const { loading, error, list, pagination } = useSelector(({ weaponList, loading }: any) => {
+  const { loading, error, list, pagination } = useSelector(({ listWeapon, loading }: any) => {
     const temp = {
-      weaponList: '',
+      listWeapon: '',
       pagination: ''
     }
 
-    if (weaponList.data !== null) {
-      temp.weaponList = weaponList.data.result
-      temp.pagination = weaponList.data.pagination
+    if (listWeapon.data !== null) {
+      temp.listWeapon = listWeapon.data.result
+      temp.pagination = listWeapon.data.pagination
     }
 
     return {
       loading: loading['board/BOARD_LIST'],
-      error: weaponList.error,
-      list: temp.weaponList,
+      error: listWeapon.error,
+      list: temp.listWeapon,
       pagination: temp.pagination
     }
   }, shallowEqual)
@@ -58,12 +58,12 @@ const Result = (props: any) => {
   }
 
   useEffect(() => {
-    dispatch(weaponList({ category: category, number, grade: grade, select: '', keyword: '' }))
+    dispatch(listWeapon({ category: category, number, grade: grade, select: '', keyword: '' }))
 
     return () => {
       console.log('containers → common → Horizontal.tsx → 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
 
-      dispatch(weaponListInitial())
+      dispatch(listWeaponInitial())
     }
   }, [dispatch, category, number, prefixed.grade])
 

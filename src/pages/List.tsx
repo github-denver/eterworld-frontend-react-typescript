@@ -6,7 +6,7 @@ import Header from '@/containers/header/Header'
 import Hgroup from '@/components/common/Hgroup'
 import Category from '@/components/category/Category'
 import Choice from '@/containers/common/Choice'
-import Rows from '@/containers/weapon/list/List'
+import List from '@/containers/list/weapon/common/List'
 // import Quick from '@/components/common/Quick'
 import Footer from '@/components/footer/Footer'
 
@@ -28,7 +28,7 @@ const func = (child: any, navigation: any) => {
   return result
 }
 
-function List({ location }: any) {
+function Result({ location }: any) {
   const pathname = location.pathname.split('/').filter((element: string) => {
     return element !== null && element !== undefined && element !== ''
   })
@@ -63,6 +63,10 @@ function List({ location }: any) {
           attributes={{
             data: [
               {
+                text: '홈',
+                custom: '/'
+              },
+              {
                 text: '근거리 무기',
                 service: 'weapon',
                 category: 'melee'
@@ -80,10 +84,10 @@ function List({ location }: any) {
               }
             ]
           }}
-          style={{ padding: '12px' }}
+          styles={{ padding: '12px' }}
         />
 
-        <Hgroup attributes={{ level: 3, title: heading, invisible: false }} style={{ padding: '12px 12px 0' }} />
+        <Hgroup attributes={{ level: 3, title: heading, invisible: false }} styles={{ padding: '12px 12px 0' }} />
         <Choice
           location={location}
           attributes={{
@@ -95,10 +99,10 @@ function List({ location }: any) {
             size: 4,
             checked: true
           }}
-          style={{ padding: '12px 12px 0' }}
+          styles={{ padding: '12px 12px 0' }}
         />
 
-        <Rows location={location} attributes={{ service, category, number, grade }} style={{ padding: '12px 12px 0' }} />
+        <List location={location} attributes={{ service, category, number, grade }} styles={{ padding: '12px 12px 0' }} />
       </section>
 
       {/* <Quick /> */}
@@ -108,4 +112,4 @@ function List({ location }: any) {
   )
 }
 
-export default React.memo(List)
+export default React.memo(Result)

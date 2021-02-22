@@ -227,7 +227,7 @@ const Item = React.memo(function Item({ attributes }: Attributes) {
   )
 })
 
-function Result({ location, attributes, style, children }: Attributes) {
+function Result({ location, attributes, styles, children }: Attributes) {
   const assignment = useMemo(() => {
     return Object.assign({}, defaultProps.attributes, attributes)
   }, [attributes])
@@ -367,7 +367,7 @@ function Result({ location, attributes, style, children }: Attributes) {
 
   return (
     <>
-      <Styled.list style={style}>
+      <Styled.list style={styles}>
         <Item
           attributes={{
             price: data.price,
@@ -385,10 +385,10 @@ function Result({ location, attributes, style, children }: Attributes) {
         />
       </Styled.list>
 
-      <Hgroup attributes={{ level: 3, title: '업그레이드 비용', invisible: false }} style={{ padding: '24px 0 0' }} />
-      <Tax location={location} attributes={{ price: data.price }} style={{ padding: '12px 0 0' }} />
+      <Hgroup attributes={{ level: 3, title: '업그레이드 비용', invisible: false }} styles={{ padding: '24px 0 0' }} />
+      <Tax location={location} attributes={{ price: data.price }} styles={{ padding: '12px 0 0' }} />
 
-      <Hgroup attributes={{ level: 3, title: '업그레이드 단계', invisible: false }} style={{ padding: '24px 0 0' }} />
+      <Hgroup attributes={{ level: 3, title: '업그레이드 단계', invisible: false }} styles={{ padding: '24px 0 0' }} />
       <Smelt
         attributes={{
           onChange: {
@@ -398,10 +398,10 @@ function Result({ location, attributes, style, children }: Attributes) {
             handle: changeHandle
           }
         }}
-        style={{ padding: '12px 0 0' }}
+        styles={{ padding: '12px 0 0' }}
       />
 
-      <Hgroup attributes={{ level: 3, title: '강화 단계', invisible: false }} style={{ padding: '24px 0 0' }} />
+      <Hgroup attributes={{ level: 3, title: '강화 단계', invisible: false }} styles={{ padding: '24px 0 0' }} />
       <Enchant
         attributes={{
           power: data.power,
@@ -409,7 +409,7 @@ function Result({ location, attributes, style, children }: Attributes) {
             body: changeEnchant
           }
         }}
-        style={{ padding: '12px 0 0' }}
+        styles={{ padding: '12px 0 0' }}
       />
     </>
   )

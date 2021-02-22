@@ -8,7 +8,7 @@ interface Attributes {
 }
 
 const Result = (props: any) => {
-  const { attributes, style } = props
+  const { attributes, styles } = props
   const { history, location } = props
   const { label, prefix, grade, suffix, start, end, size, checked } = attributes
 
@@ -47,7 +47,7 @@ const Result = (props: any) => {
         checked: checked,
         onChange: handleUrlChange
       }}
-      style={style}
+      styles={styles}
     />
   )
 }

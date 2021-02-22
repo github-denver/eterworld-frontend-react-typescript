@@ -1,47 +1,52 @@
-import React, { useMemo } from 'react'
+import React from 'react'
+// import React, { useMemo } from 'react'
 import styled, { css } from 'styled-components'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import Vertical from '@/components/common/Vertical'
 
-import { Attributes } from '@/interfaces/padding.interfaces'
+// import { Attributes } from '@/interfaces/padding.interfaces'
 
 import 'swiper/swiper-bundle.min.css'
+
+interface Attributes {
+  [key: string]: any
+}
 
 interface State {
   swiper: any
 }
 
 interface Props {
-  padding: boolean
+  styles: boolean
 }
 
 const Styled: State = {
   swiper: styled.div`
-    ${(props: Props) => {
+    /* ${(props: Props) => {
       return (
-        props.padding &&
+        props.styles &&
         css`
           .group_swiper {
             padding: 12px;
           }
         `
       )
-    }}
+    }} */
   `
 }
 
-function Result({ attributes }: Attributes) {
-  const assignment = useMemo(() => {
+function Result({ attributes, styles }: Attributes) {
+  /* const assignment = useMemo(() => {
     return Object.assign({}, defaultProps.attributes, attributes)
   }, [attributes])
 
-  const { padding } = useMemo(() => {
+  const {} = useMemo(() => {
     return assignment
-  }, [assignment])
+  }, [assignment]) */
 
   return (
-    <Styled.swiper padding={padding}>
+    <Styled.swiper style={styles}>
       <Swiper
         slidesPerView={2}
         freeMode={true}
@@ -57,10 +62,8 @@ function Result({ attributes }: Attributes) {
   )
 }
 
-const defaultProps = {
-  attributes: {
-    padding: false
-  }
-}
+/* const defaultProps = {
+  attributes: {}
+} */
 
-export default Result
+export default React.memo(Result)

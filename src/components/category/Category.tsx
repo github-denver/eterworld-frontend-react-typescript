@@ -82,7 +82,7 @@ const Styled: State = {
 }
 
 function Item({ attributes }: Attributes) {
-  const { query, text, service, category, current } = attributes
+  const { query, text, service, category, custom, current } = attributes
 
   const queryString = query.map((currentValue: object, index: number) => {
     let result: string = ''
@@ -100,9 +100,15 @@ function Item({ attributes }: Attributes) {
 
   return (
     <Styled.item>
-      <Styled.link to={`/eternalcity/${service}/${category}/list?${queryString}`} current={category === current ? 1 : 0}>
-        {text}
-      </Styled.link>
+      {!!custom ? (
+        <Styled.link to={`/`} current={category === current ? 1 : 0}>
+          {text}
+        </Styled.link>
+      ) : (
+        <Styled.link to={`/eternalcity/${service}/${category}/list?${queryString}`} current={category === current ? 1 : 0}>
+          {text}
+        </Styled.link>
+      )}
     </Styled.item>
   )
 }
@@ -121,6 +127,7 @@ function List({ attributes }: Attributes) {
               text: currentValue.text,
               service: currentValue.service,
               category: currentValue.category,
+              custom: currentValue.custom,
               current: category
             }}
           />
@@ -130,7 +137,7 @@ function List({ attributes }: Attributes) {
   )
 }
 
-function Result({ location, attributes, style }: Attributes) {
+function Result({ location, attributes, styles }: Attributes) {
   const pathname = location.pathname.split('/').filter((element: string) => {
     return element !== null && element !== undefined && element !== ''
   })
@@ -146,7 +153,7 @@ function Result({ location, attributes, style }: Attributes) {
   }, [assignment])
 
   return (
-    <Styled.category style={style}>
+    <Styled.category style={styles}>
       <Hgroup attributes={{ level: 3, title: '전체 서비스' }} />
 
       <List attributes={{ data: data, query: query, category: category }} />

@@ -6,25 +6,25 @@ import qs from 'qs'
 
 import Tax from '@/components/common/Tax'
 
-import { weaponRead, weaponReadInitial } from '@/modules/weapon/read'
+import { readWeapon, readWeaponInitial } from '@/modules/read/weapon/read'
 
 const Result = (props: any) => {
-  const { style } = props
+  const { styles } = props
   const { location } = props
 
-  const { loading, error, list } = useSelector(({ weaponRead, loading }: any) => {
+  const { loading, error, list } = useSelector(({ readWeapon, loading }: any) => {
     const temp = {
-      weaponRead: ''
+      readWeapon: ''
     }
 
-    if (weaponRead.data !== null) {
-      temp.weaponRead = weaponRead.data
+    if (readWeapon.data !== null) {
+      temp.readWeapon = readWeapon.data
     }
 
     return {
       loading: loading['board/WEAPON_READ'],
-      error: weaponRead.error,
-      list: temp.weaponRead
+      error: readWeapon.error,
+      list: temp.readWeapon
     }
   }, shallowEqual)
 
@@ -55,12 +55,12 @@ const Result = (props: any) => {
   }
 
   useEffect(() => {
-    dispatch(weaponRead({ service: service, category: category, number, grade: grade, select: '', keyword: '' }))
+    dispatch(readWeapon({ service: service, category: category, number, grade: grade, select: '', keyword: '' }))
 
     return () => {
       console.log('components → common → Tax.tsx → 언 마운트 될 때 리덕스에서 데이터를 삭제합니다.')
 
-      dispatch(weaponReadInitial())
+      dispatch(readWeaponInitial())
     }
   }, [dispatch, service, category, number, grade])
 
@@ -72,7 +72,7 @@ const Result = (props: any) => {
         error: error,
         list: list
       }}
-      style={style}
+      styles={styles}
     />
   )
 }

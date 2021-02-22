@@ -5,7 +5,7 @@ import qs from 'qs'
 import Header from '@/containers/header/Header'
 import Hgroup from '@/components/common/Hgroup'
 import Category from '@/components/category/Category'
-import Read from '@/containers/weapon/read/Read'
+import Read from '@/containers/read/weapon/Read'
 import Footer from '@/components/footer/Footer'
 
 import navigation from '@/utility/navigation'
@@ -62,6 +62,10 @@ function Result({ location }: any) {
             attributes={{
               data: [
                 {
+                  text: '홈',
+                  custom: '/'
+                },
+                {
                   text: '근거리 무기',
                   service: 'weapon',
                   category: 'melee'
@@ -79,11 +83,11 @@ function Result({ location }: any) {
                 }
               ]
             }}
-            style={{ padding: '12px' }}
+            styles={{ padding: '12px' }}
           />
 
-          <Hgroup attributes={{ level: 3, title: heading, invisible: false }} style={{ padding: '12px 12px 0' }} />
-          <Read location={location} attributes={{ service, category, grade, number }} style={{ padding: '12px 12px 0' }} />
+          <Hgroup attributes={{ level: 3, title: heading, invisible: false }} styles={{ padding: '12px 12px 0' }} />
+          <Read location={location} attributes={{ service, category, grade, number }} styles={{ padding: '12px 12px 0' }} />
         </section>
 
         <Footer />

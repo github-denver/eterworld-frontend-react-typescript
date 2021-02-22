@@ -150,7 +150,7 @@ const Item = React.memo(function Item({ attributes }: Attributes) {
   return result
 })
 
-function Result({ attributes, style }: Attributes) {
+function Result({ attributes, styles }: Attributes) {
   const assignment = useMemo(() => {
     return Object.assign({}, defaultProps.attributes, attributes)
   }, [attributes])
@@ -160,7 +160,7 @@ function Result({ attributes, style }: Attributes) {
   }, [assignment])
 
   return (
-    <Styled.list style={style}>
+    <Styled.list style={styles}>
       <Item
         attributes={{
           data,

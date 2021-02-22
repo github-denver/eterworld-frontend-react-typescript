@@ -19,6 +19,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.8.1",
     "craco-alias": "^2.1.1",
+    "immer": "^8.0.1",
     "mutation-observer": "^1.0.3",
     "qs": "^6.9.4",
     "react": "^17.0.1",

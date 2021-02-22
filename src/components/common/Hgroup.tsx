@@ -27,7 +27,7 @@ const Heading = React.memo(function Heading({ attributes, children }: Attributes
   return <Tag>{title}</Tag>
 })
 
-function Hgroup({ attributes, style }: Attributes) {
+function Hgroup({ attributes, styles }: Attributes) {
   const assignment = useMemo(() => {
     return Object.assign({}, defaultProps.attributes, attributes)
   }, [attributes])
@@ -37,7 +37,7 @@ function Hgroup({ attributes, style }: Attributes) {
   }, [assignment])
 
   return (
-    <Styled.heading className={!!invisible && 'invisible'} style={style}>
+    <Styled.heading className={!!invisible && 'invisible'} style={styles}>
       <Heading attributes={{ level: level, title: title }} />
     </Styled.heading>
   )
